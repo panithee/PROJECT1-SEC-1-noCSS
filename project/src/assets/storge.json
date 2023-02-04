@@ -1,0 +1,4 @@
+{
+    "person":[{"name":"john"},{"name":"jane"},{"name":"joe"}],
+    "food":[{"name":"donut","price":1.99,"person" : ["joe","jane"]},{"name":"coffee","price":2.99,"person" : ["john","jane"]},{"name":"tea","price":1.99,"person" : ["john","jane"]}]
+}
