@@ -2,6 +2,11 @@
 import { ref } from "vue";
 let persons = [{name: "John"},{name: "jhon"}]
 let foodLists = [{name: "somtum" ,price :200,person: [persons[0]]},{name: "banana" ,price :200,person: [persons[0],persons[1]]}];
+
+const food = () => {
+
+}
+
 const sw = ref(true);
 const switchmenu = (e) => {
   if (e === "list") {
@@ -10,7 +15,7 @@ const switchmenu = (e) => {
   if (e === "person") {
     sw.value = false;
   }
-};
+};  
 const totalFoodLits = ref(foodLists.reduce((total,food)=>total+food.price,0))
 
 </script>
@@ -53,9 +58,9 @@ const totalFoodLits = ref(foodLists.reduce((total,food)=>total+food.price,0))
           </thead>
           <tbody>
             <tr v-for="(food,index ) in foodLists" key="index">
-              <td class="text-2xl pl-5">{{ food.name }}</td>
-              <td class="text-2xl pr-4">{{ food.price }}</td>
-              <td class="text-2xl pr-4">{{ food.price/food.person.length}}</td>
+              <td class="text-2xl pl-5 text-center">{{ food.name }}</td>
+              <td class="text-2xl pr-4 text-center">{{ food.price }}</td>
+              <td class="text-2xl pr-4 text-center">{{ food.price/food.person.length}}</td>
             </tr>
           </tbody>
         </table>
