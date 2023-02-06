@@ -21,15 +21,13 @@ module.exports = {
         "bgFooter": '#FFE8D3',
         "btn1": '#DD743E',
         "checkList1": '#D9D9D9',
-<<<<<<< HEAD
-        "checkList2": '#3C6673'
-=======
+        "checkList2": '#3C6673',
         "checkList2": '#3C6673',
         "person1": '#EDFFE9',
         "person2": '#F7E9FF',
         "person3":' #FFE9EE',
-        "person4":'#FFF9E9'
->>>>>>> origin/oat
+        "person4":'#FFF9E9',
+        "bgbtn" : '#FFEDE9'
 
       }
     },

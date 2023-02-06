@@ -1,18 +1,18 @@
-
 <script setup>
-import { ref } from 'vue';
-const sw = ref(true)
-const swiitchmenu=(e)=>{
-    if (e == "list") {
-      sw.value = true
-    }
-    if (e == "Person") {
-      sw.value = false
-    }
-}
+import { ref } from "vue";
+const sw = ref(true);
+const switchmenu = (e) => {
+  if (e === "list") {
+    sw.value = true;
+  }
+  if (e === "person") {
+    sw.value = false;
+  }
+};
 </script>
 
 <template>
+  <!-- <div class="w-full h-full">
    <div class="inline-flex flex-col items-center justify-end  bg-bgPage" style="width: 100%; height: 100%; padding-top: 72px;">
     <p class="w-96 h-16 text-6xl text-center  " style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">NO CSS </p>
     <div class="flex space-x-1 items-center justify-center p-1 bg-red-50 rounded-3xl m-10"  v-if="sw" style="width: 410px; height: 60px;">
@@ -69,9 +69,9 @@ const swiitchmenu=(e)=>{
                 </div>
                 
                 <div class="inline-flex flex-col space-y-0.5 items-center justify-end w-2 h-7">
-                    <div class="w-full h-2 bg-gray-300 rounded-full"/>
-                    <div class="w-full h-2 bg-gray-300 rounded-full"/>
-                    <div class="w-full h-2 bg-gray-300 rounded-full"/>
+                    <div class="w-full h-2 bg-gray-300 rounded-full"></div>
+                    <div class="w-full h-2 bg-gray-300 rounded-full"></div>
+                    <div class="w-full h-2 bg-gray-300 rounded-full"></div>
                 </div>
             </div>
         </div> 
@@ -98,12 +98,66 @@ const swiitchmenu=(e)=>{
     </div>
     
 </div>
+</div> -->
+
+  <div class="w-screen h-screen bg-bgPage">
+    <div class="w-full h-full">
+      <h1 class="flex justify-center pt-10 text-3xl text-brownFont font-semibold drop-shadow">
+        NO CSS
+      </h1>
+
+      <div class="flex w-1/6 items-center bg-bgbtn rounded-full m-auto mt-10" v-if="sw">
+        <div class="w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchmenu('list')">
+          <p class="text-xl text-center text-white">All List</p>
+        </div>
+        <div class="w-1/2 rounded-full my-1 mr-1 cursor-pointer" @click="switchmenu('person')">
+          <p class="text-xl text-center text-brownFont">Per Person</p>
+        </div>
+      </div>
+
+      <div class="flex w-1/6 items-center bg-bgbtn rounded-full m-auto mt-10" v-else>
+        <div class="w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchmenu('list')">
+          <p class="text-xl text-center text-brownFont">All List</p>
+        </div>
+        <div class="w-1/2 bg-btn1 rounded-full my-1 mr-1 cursor-pointer" @click="switchmenu('person')">
+          <p class="text-xl text-center text-white">Per Person</p>
+        </div>
+      </div>
+
+      <div class="m-auto mt-10 rounded-3xl bg-bgBox w-1/2 h-2/4" v-if="sw">
+        <table class="w-full text-brownFont">
+          <thead>
+            <tr>
+              <th class="flex pl-5 text-2xl">Your Food Lists</th>
+              <th class="text-2xl pr-4">Prices</th>
+              <th class="text-2xl pr-4">Avg</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="flex items-center justify-center m-auto mt-5 bg-btn1 w-1/12 h-12 rounded-full" v-if="sw">
+        <p class="text-white text-center text-3xl">ADD</p>
+      </div>
+
+      <div class="flex justify-center m-auto mt-5 w-1/12" v-if="sw">
+        <p class="text-btn1 text-center text-xl underline">Clear All</p>
+      </div>
+
+      <div class="w-full h-20 bg-bgFooter fixed bottom-0 ">
+        <div class="flex justify-center">
+          <p class="text-4xl pl-40 pt-7 text-center">Total:</p>
+          <p class="text-4xl pt-7 text-center">Person:</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-  @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
-  p{
-    font-family: "Itim";
-    
-  }
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+h1,p,tr,th,td {
+  font-family: "Itim";
+}
 </style>
