@@ -29,20 +29,20 @@ const totalFoodLits = ref(foodLists.reduce((total,food)=>total+food.price,0))
       </h1>
 
       <div class="flex w-1/2 items-center bg-bgbtn rounded-full m-auto  mt-10 " v-if="sw">
-        <div class="w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchmenu('list')">
-          <p class="text-xl text-center text-white">All List</p>
+        <div class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5" @click="switchmenu('list')">
+          <button class="text-xl text-white">All List</button>
         </div>
-        <div class="w-1/2 rounded-full my-1 mr-1 cursor-pointer" @click="switchmenu('person')">
-          <p class="text-xl text-center text-brownFont">Per Person</p>
+        <div class="flex justify-center w-1/2 rounded-full my-1 mr-1" @click="switchmenu('person')">
+          <button class="text-xl text-brownFont">Per Person</button>
         </div>
       </div>
 
       <div class="flex w-1/2 items-center bg-bgbtn rounded-full m-auto mt-10" v-else>
-        <div class="w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchmenu('list')">
-          <p class="text-xl text-center text-brownFont">All List</p>
+        <div class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchmenu('list')">
+          <button class="text-xl text-brownFont">All List</button>
         </div>
-        <div class="w-1/2 bg-btn1 rounded-full my-1 mr-1 cursor-pointer" @click="switchmenu('person')">
-          <p class="text-xl text-center text-white">Per Person</p>
+        <div class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 mr-1 cursor-pointer" @click="switchmenu('person')">
+          <button class="text-xl text-white">Per Person</button>
         </div>
       </div>
 
@@ -67,11 +67,11 @@ const totalFoodLits = ref(foodLists.reduce((total,food)=>total+food.price,0))
       </div>
 
       <div class="flex items-center justify-center m-auto mt-5 bg-btn1 w-2/12 h-12 rounded-full" v-if="sw">
-        <p class="text-white text-center text-xl">ADD</p>
+        <button @click="" class="text-white text-xl">ADD</button>
       </div>
       
       <div class="flex justify-center m-auto mt-5 w-4/12" v-if="sw">
-        <p class="text-btn1 text-center text-xl underline">Clear All</p>
+        <button class="text-btn1 text-xl underline">Clear All</button>
       </div>
 
       <div class="w-full h-20 bg-bgFooter fixed bottom-0 ">
@@ -87,7 +87,7 @@ const totalFoodLits = ref(foodLists.reduce((total,food)=>total+food.price,0))
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
-h1,p,tr,th,td {
+h1,p,tr,th,td, button {
   font-family: "Itim";
 }
 </style>
