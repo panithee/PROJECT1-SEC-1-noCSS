@@ -1,11 +1,14 @@
 <script setup>
-import { ref } from "vue";
-let persons = [{name: "John"},{name: "jhon"}]
-let foodLists = [{name: "somtum" ,price :200,person: [persons[0]]},{name: "banana" ,price :200,person: [persons[0],persons[1]]}];
+import {ref} from "vue";
+
+let persons = [{name: "John"}, {name: "jhon"}];
+let foodLists = [
+  {name: "somtum", price: 200, person: [persons[0]]},
+  {name: "banana", price: 200, person: [persons[0], persons[1]]},
+];
 
 const food = () => {
-
-}
+};
 
 const sw = ref(true);
 const switchmenu = (e) => {
@@ -15,79 +18,119 @@ const switchmenu = (e) => {
   if (e === "person") {
     sw.value = false;
   }
-};  
-const totalFoodLits = ref(foodLists.reduce((total,food)=>total+food.price,0))
-
+};
+const totalFoodLits = ref(
+    foodLists.reduce((total, food) => total + food.price, 0)
+);
 </script>
 
 <template>
-
   <div class="w-screen h-screen bg-bgPage">
     <div class="w-full h-full">
-      <h1 class="flex justify-center pt-10 text-3xl text-brownFont font-semibold drop-shadow">
+      <h1
+          class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow"
+      >
         NO CSS
       </h1>
 
-      <div class="flex w-1/2 items-center bg-bgbtn rounded-full m-auto  mt-10 " v-if="sw">
-        <div class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5" @click="switchmenu('list')">
+      <div
+          v-if="sw"
+          class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
+      >
+        <div
+            class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5"
+            @click="switchmenu('list')"
+        >
           <button class="text-xl text-white">All List</button>
         </div>
-        <div class="flex justify-center w-1/2 rounded-full my-1 mr-1" @click="switchmenu('person')">
+        <div
+            class="flex justify-center w-1/2 my-1 mr-1 rounded-full"
+            @click="switchmenu('person')"
+        >
           <button class="text-xl text-brownFont">Per Person</button>
         </div>
       </div>
 
-      <div class="flex w-1/2 items-center bg-bgbtn rounded-full m-auto mt-10" v-else>
-        <div class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchmenu('list')">
+      <div
+          v-else
+          class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
+      >
+        <div
+            class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer"
+            @click="switchmenu('list')"
+        >
           <button class="text-xl text-brownFont">All List</button>
         </div>
-        <div class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 mr-1 cursor-pointer" @click="switchmenu('person')">
+        <div
+            class="flex justify-center w-1/2 my-1 mr-1 rounded-full cursor-pointer bg-btn1"
+            @click="switchmenu('person')"
+        >
           <button class="text-xl text-white">Per Person</button>
         </div>
       </div>
 
-      <div class="m-auto mt-10 rounded-3xl bg-bgBox w-5/6  sm:w-1/2" v-if="sw">
+      <div v-if="sw" class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2">
         <table class="w-full text-brownFont">
           <thead>
-            <tr>
-              <th class="table-cell pl-5 text-2xl sm:hidden">Your Food </th> 
-              <th class="pl-5 text-2xl hidden sm:table-cell">Your Food Lists</th> 
-              <th class="text-2xl pr-4">Prices</th>
-              <th class="text-2xl pr-4">Avg</th>
-            </tr>
+          <tr>
+            <th class="table-cell pl-5 text-2xl sm:hidden">Your Food</th>
+            <th class="hidden pl-5 text-2xl sm:table-cell">
+              Your Food Lists
+            </th>
+            <th class="pr-4 text-2xl">Prices</th>
+            <th class="pr-4 text-2xl">Avg</th>
+          </tr>
           </thead>
           <tbody>
-            <tr v-for="(food,index ) in foodLists" key="index">
-              <td class="text-2xl pl-5 text-center">{{ food.name }}</td>
-              <td class="text-2xl pr-4 text-center">{{ food.price }}</td>
-              <td class="text-2xl pr-4 text-center">{{ food.price/food.person.length}}</td>
-            </tr>
+          <tr v-for="(food, index) in foodLists" key="index">
+            <td class="pl-5 text-2xl text-center">{{ food.name }}</td>
+            <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
+            <td class="pr-4 text-2xl text-center">
+              {{ food.price / food.person.length }}
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="flex items-center justify-center m-auto mt-5 bg-btn1 w-2/12 h-12 rounded-full" v-if="sw">
-        <button @click="" class="text-white text-xl">ADD</button>
-      </div>
-      
-      <div class="flex justify-center m-auto mt-5 w-4/12" v-if="sw">
-        <button class="text-btn1 text-xl underline">Clear All</button>
+      <div
+          v-if="sw"
+          class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1"
+      >
+        <button class="text-xl text-white" @click="">ADD</button>
       </div>
 
-      <div class="w-full h-20 bg-bgFooter fixed bottom-0 ">
-        <div class="flex ">
-          <p class="w-1/2 text-2xl pt-7 text-center">Total:{{totalFoodLits}}</p>
-          <p class="w-1/2 text-2xl pt-7 text-center">Person:</p>
+      <div v-if="sw" class="flex justify-center w-4/12 m-auto mt-5">
+        <button class="text-xl underline text-btn1">Clear All</button>
+      </div>
+
+      <div class="fixed bottom-0 w-full h-20 bg-bgFooter">
+        <div class="flex">
+          <p class="w-1/2 text-2xl text-center pt-7">
+            Total:{{ totalFoodLits }}
+          </p>
+          <p class="w-1/2 text-2xl text-center pt-7">Person:</p>
         </div>
       </div>
     </div>
+
+    <!--    pop up -->
+    <div>
+    </div>
+
   </div>
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
-h1,p,tr,th,td, button {
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+h1,
+p,
+tr,
+th,
+td,
+button {
   font-family: "Itim";
 }
 </style>
