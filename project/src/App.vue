@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <script setup>
 import { ref } from "vue";
 
@@ -22,7 +21,6 @@ const switchMenu = (e) => {
 const totalFoodLits = ref(
   foodLists.reduce((total, food) => total + food.price, 0)
 );
-
 </script>
 
 <template>
@@ -121,10 +119,6 @@ const totalFoodLits = ref(
 </template>
 
 <style scoped>
-<<<<<<< HEAD
-=======
-
->>>>>>> b8ef2c9 (update)
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 
 h1,
@@ -155,6 +149,3 @@ button {
   border-radius: 0.75rem;
 }
 </style>
-=======
-a
->>>>>>> ea1dd819e18f3b7d785075b6e43f12ec2a124cfe
