@@ -159,6 +159,13 @@ const totalFoodLits = ref(
         </div>
       </div>
     </div>
+    // pop-up
+    <div v-if="toggleOverlay">
+      <!-- <div
+        class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50"
+      ></div> -->
+      <div class="fixed w-7/12 m-auto bg-slate-400 h-1/2"></div>
+    </div>
   </div>
 </template>
 
