@@ -21,6 +21,7 @@ const switchMenu = (e) => {
 const totalFoodLits = ref(
   foodLists.reduce((total, food) => total + food.price, 0)
 );
+
 </script>
 
 <template>
@@ -119,6 +120,10 @@ const totalFoodLits = ref(
 </template>
 
 <style scoped>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b8ef2c9 (update)
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 
 h1,
@@ -127,7 +132,7 @@ tr,
 th,
 td,
 button {
-  font-family: "Itim";
+  font-family: "Itim", serif;
 }
 
 .color-0 {
