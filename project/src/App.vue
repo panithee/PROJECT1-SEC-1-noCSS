@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script setup>
 import { ref } from "vue";
 
@@ -154,3 +155,6 @@ button {
   border-radius: 0.75rem;
 }
 </style>
+=======
+a
+>>>>>>> ea1dd819e18f3b7d785075b6e43f12ec2a124cfe
