@@ -1,15 +1,38 @@
 <script setup>
-import { ref } from "vue";
-let persons = [{ name: "John" }, { name: "jhon" }];
-let foodLists = [
+import { ref, computed } from "vue";
+let persons = [
+  { name: "John" },
+  { name: "jhon" },
+  { name: "Prim" },
+  { name: "Henry" },
+  { name: "Mo" },
+  { name: "Eve" },
+  { name: "Oat" },
+  { name: "Henry" },
+  { name: "Mo" },
+  { name: "Eve" },
+  { name: "Oat" },
+  { name: "Henry" },
+  { name: "Mo" },
+  { name: "Eve" },
+  { name: "Oat" },
+];
+let foodLists = ref([
   { name: "somtum", price: 200, person: [persons[0]] },
   { name: "banana", price: 200, person: [persons[0], persons[1]] },
-];
+]);
 
-const food = () => {};
+const hello = () => {
+  console.log("Hello");
+};
+
+const clearFoodList = () => {
+  foodLists.value = [];
+  return foodLists;
+};
 
 const sw = ref(true);
-const switchmenu = (e) => {
+const switchMenu = (e) => {
   if (e === "list") {
     sw.value = true;
   }
@@ -18,16 +41,8 @@ const switchmenu = (e) => {
   }
 };
 const totalFoodLits = ref(
-  foodLists.reduce((total, food) => total + food.price, 0)
+  foodLists.value.reduce((total, food) => total + food.price, 0)
 );
-
-const toggleOverlay = ref(false);
-
-const toggle = (e) => {
-  toggleOverlay.value = !toggleOverlay.value;
-  if (toggleOverlay.value === true) {
-  }
-};
 </script>
 
 <template>
@@ -45,13 +60,13 @@ const toggle = (e) => {
       >
         <div
           class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5"
-          @click="switchmenu('list')"
+          @click="switchMenu('list')"
         >
           <button class="text-xl text-white">All List</button>
         </div>
         <div
           class="flex justify-center w-1/2 my-1 mr-1 rounded-full"
-          @click="switchmenu('person')"
+          @click="switchMenu('person')"
         >
           <button class="text-xl text-brownFont">Per Person</button>
         </div>
@@ -63,13 +78,13 @@ const toggle = (e) => {
       >
         <div
           class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer"
-          @click="switchmenu('list')"
+          @click="switchMenu('list')"
         >
           <button class="text-xl text-brownFont">All List</button>
         </div>
         <div
           class="flex justify-center w-1/2 my-1 mr-1 rounded-full cursor-pointer bg-btn1"
-          @click="switchmenu('person')"
+          @click="switchMenu('person')"
         >
           <button class="text-xl text-white">Per Person</button>
         </div>
@@ -80,7 +95,7 @@ const toggle = (e) => {
           <thead>
             <tr>
               <th class="table-cell pl-5 text-2xl sm:hidden">Your Food</th>
-              <th class="hidden pl-5 text-2xl sm:table-cell">
+              <th class="hidden pl-10 text-2xl text-left sm:table-cell">
                 Your Food Lists
               </th>
               <th class="pr-4 text-2xl">Prices</th>
@@ -89,10 +104,31 @@ const toggle = (e) => {
           </thead>
           <tbody>
             <tr v-for="(food, index) in foodLists" key="index">
-              <td class="pl-5 text-2xl text-center">{{ food.name }}</td>
+              <td class="pl-10 text-2xl text-left">
+                {{ food.name }}
+                <tr>
+                  <div class="w-1/2 overflow-x-scroll">
+                    <td v-for="(person, index) in persons" key="index">
+                      <span
+                        class="mr-2 text-base"
+                        :class="['color-' + (index % 4)]"
+                        >{{ person.name }}</span
+                      >
+                    </td>
+                  </div>
+                </tr>
+              </td>
               <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
               <td class="pr-4 text-2xl text-center">
                 {{ food.price / food.person.length }}
+              </td>
+              <td>
+                <img
+                  src="./assets/iconEdit.svg"
+                  alt="iconEdit"
+                  class="w-5 h-5 mr-3"
+                  @click="hello"
+                />
               </td>
             </tr>
           </tbody>
@@ -103,11 +139,13 @@ const toggle = (e) => {
         class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1"
         v-if="sw"
       >
-        <button @click="toggle()" class="text-xl text-white">ADD</button>
+        <button class="text-xl text-white">ADD</button>
       </div>
 
       <div class="flex justify-center w-4/12 m-auto mt-5" v-if="sw">
-        <button class="text-xl underline text-btn1">Clear All</button>
+        <button @click="clearFoodList" class="text-xl underline text-btn1">
+          Clear All
+        </button>
       </div>
 
       <div class="fixed bottom-0 w-full h-20 bg-bgFooter">
@@ -115,7 +153,9 @@ const toggle = (e) => {
           <p class="w-1/2 text-2xl text-center pt-7">
             Total:{{ totalFoodLits }}
           </p>
-          <p class="w-1/2 text-2xl text-center pt-7">Person:</p>
+          <p class="w-1/2 text-2xl text-center pt-7">
+            Person: {{ persons.length }}
+          </p>
         </div>
       </div>
     </div>
@@ -139,5 +179,24 @@ th,
 td,
 button {
   font-family: "Itim";
+}
+
+.color-0 {
+  background-color: #edffe9;
+  border-radius: 0.75rem;
+}
+
+.color-1 {
+  background-color: #f7e9ff;
+  border-radius: 0.75rem;
+}
+
+.color-2 {
+  background-color: #ffe9ee;
+  border-radius: 0.75rem;
+}
+.color-3 {
+  background-color: #fff9e9;
+  border-radius: 0.75rem;
 }
 </style>
