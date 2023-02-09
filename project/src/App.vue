@@ -1,13 +1,35 @@
 <script setup>
-import { ref } from "vue";
-
-let persons = [{ name: "John" }, { name: "jhon" }];
-let foodLists = [
+import { ref, computed } from "vue";
+let persons = [
+  { name: "John" },
+  { name: "jhon" },
+  { name: "Prim" },
+  { name: "Henry" },
+  { name: "Mo" },
+  { name: "Eve" },
+  { name: "Oat" },
+  { name: "Henry" },
+  { name: "Mo" },
+  { name: "Eve" },
+  { name: "Oat" },
+  { name: "Henry" },
+  { name: "Mo" },
+  { name: "Eve" },
+  { name: "Oat" },
+];
+let foodLists = ref([
   { name: "somtum", price: 200, person: [persons[0]] },
   { name: "banana", price: 200, person: [persons[0], persons[1]] },
-];
+]);
 
-const food = () => {};
+const hello = () => {
+  console.log("Hello");
+};
+
+const clearFoodList = () => {
+  foodLists.value = [];
+  return foodLists;
+};
 
 const sw = ref(true);
 const switchMenu = (e) => {
@@ -19,7 +41,7 @@ const switchMenu = (e) => {
   }
 };
 const totalFoodLits = ref(
-  foodLists.reduce((total, food) => total + food.price, 0)
+  foodLists.value.reduce((total, food) => total + food.price, 0)
 );
 </script>
 
@@ -33,47 +55,47 @@ const totalFoodLits = ref(
       </h1>
 
       <div
-        v-if="sw"
         class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
+        v-if="sw"
       >
         <div
           class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5"
-          @click="switchmenu('list')"
+          @click="switchMenu('list')"
         >
           <button class="text-xl text-white">All List</button>
         </div>
         <div
           class="flex justify-center w-1/2 my-1 mr-1 rounded-full"
-          @click="switchmenu('person')"
+          @click="switchMenu('person')"
         >
           <button class="text-xl text-brownFont">Per Person</button>
         </div>
       </div>
 
       <div
-        v-else
         class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
+        v-else
       >
         <div
           class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer"
-          @click="switchmenu('list')"
+          @click="switchMenu('list')"
         >
           <button class="text-xl text-brownFont">All List</button>
         </div>
         <div
           class="flex justify-center w-1/2 my-1 mr-1 rounded-full cursor-pointer bg-btn1"
-          @click="switchmenu('person')"
+          @click="switchMenu('person')"
         >
           <button class="text-xl text-white">Per Person</button>
         </div>
       </div>
 
-      <div v-if="sw" class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2">
+      <div class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2" v-if="sw">
         <table class="w-full text-brownFont">
           <thead>
             <tr>
               <th class="table-cell pl-5 text-2xl sm:hidden">Your Food</th>
-              <th class="hidden pl-5 text-2xl sm:table-cell">
+              <th class="hidden pl-10 text-2xl text-left sm:table-cell">
                 Your Food Lists
               </th>
               <th class="pr-4 text-2xl">Prices</th>
@@ -82,10 +104,31 @@ const totalFoodLits = ref(
           </thead>
           <tbody>
             <tr v-for="(food, index) in foodLists" key="index">
-              <td class="pl-5 text-2xl text-center">{{ food.name }}</td>
+              <td class="pl-10 text-2xl text-left">
+                {{ food.name }}
+                <tr>
+                  <div class="w-1/2 overflow-x-scroll">
+                    <td v-for="(person, index) in persons" key="index">
+                      <span
+                        class="mr-2 text-base"
+                        :class="['color-' + (index % 4)]"
+                        >{{ person.name }}</span
+                      >
+                    </td>
+                  </div>
+                </tr>
+              </td>
               <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
               <td class="pr-4 text-2xl text-center">
                 {{ food.price / food.person.length }}
+              </td>
+              <td>
+                <img
+                  src="./assets/iconEdit.svg"
+                  alt="iconEdit"
+                  class="w-5 h-5 mr-3"
+                  @click="hello"
+                />
               </td>
             </tr>
           </tbody>
@@ -93,14 +136,16 @@ const totalFoodLits = ref(
       </div>
 
       <div
-        v-if="sw"
         class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1"
+        v-if="sw"
       >
-        <button class="text-xl text-white" @click="">ADD</button>
+        <button class="text-xl text-white">ADD</button>
       </div>
 
-      <div v-if="sw" class="flex justify-center w-4/12 m-auto mt-5">
-        <button class="text-xl underline text-btn1">Clear All</button>
+      <div class="flex justify-center w-4/12 m-auto mt-5" v-if="sw">
+        <button @click="clearFoodList" class="text-xl underline text-btn1">
+          Clear All
+        </button>
       </div>
 
       <div class="fixed bottom-0 w-full h-20 bg-bgFooter">
@@ -108,18 +153,17 @@ const totalFoodLits = ref(
           <p class="w-1/2 text-2xl text-center pt-7">
             Total:{{ totalFoodLits }}
           </p>
-          <p class="w-1/2 text-2xl text-center pt-7">Person:</p>
+          <p class="w-1/2 text-2xl text-center pt-7">
+            Person: {{ persons.length }}
+          </p>
         </div>
       </div>
     </div>
-
-    <!--    pop up -->
-    <div></div>
   </div>
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
 h1,
 p,
@@ -127,7 +171,7 @@ tr,
 th,
 td,
 button {
-  font-family: "Itim", serif;
+  font-family: "Itim";
 }
 
 .color-0 {
