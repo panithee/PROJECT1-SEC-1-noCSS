@@ -135,9 +135,5 @@ button {
   border-radius: 0.75rem;
 }
 
-.overflow-x-visible::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-  }
-
 
 </style>
