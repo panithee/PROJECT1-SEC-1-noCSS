@@ -85,7 +85,7 @@ const totalFoodLits = ref(
         <table class="w-full text-brownFont">
           <thead>
             <tr>
-              <th class="table-cell pl-5 text-2xl sm:hidden">Your Food</th>
+              <th class="table-cell pl-10 text-left text-2xl sm:hidden">Your Food</th>
               <th class="hidden pl-10 text-2xl text-left sm:table-cell">
                 Your Food Lists
               </th>
@@ -98,7 +98,7 @@ const totalFoodLits = ref(
               <td class="pl-10 text-2xl text-left">
                 {{ food.name }}
             <tr>
-              <div class="flex flex-wrap overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 h-20 sm:h-auto sm:overflow-x-scroll">
+              <div class="flex flex-wrap overflow-y-scroll w-24 h-20 sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
                 <td v-for="(person, index) in persons" key="index">
                   <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
                 </td>
