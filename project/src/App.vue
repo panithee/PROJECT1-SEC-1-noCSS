@@ -1,6 +1,5 @@
-
 <script setup>
-import { ref } from "vue";
+import { ref, toRef } from "vue";
 
 let persons = [
   { name: "John" },
@@ -33,7 +32,8 @@ let foodLists = ref([
   { name: "Kaiped", price: 200, person: [persons[0]] },
   { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
 ]);
-
+let name = toRef(foodLists.value[1], 'name')
+let personSize = toRef(foodLists.value[1].person, 'length')
 const hello = () => {
   console.log("Hello");
 };
@@ -68,9 +68,10 @@ const eventFoodList = (e, mode) => {
   }
 };
 const showMenuStatus = ref(true);
-const showMenu = () => {
-  showMenuStatus.value = !showMenuStatus.value;
-};
+// const showMenu = () => {
+//   console.log("showMenu");
+//   showMenuStatus.value = !showMenuStatus.value;
+// };
 </script>
 
 <template>
@@ -99,14 +100,14 @@ const showMenu = () => {
         </div>
       </div>
 
-      <div v-if="sw" class="w-5/6 m-auto mt-10 overflow-y-scroll rounded-3xl bg-bgBox sm:w-1/2 h-1/2">
+      <div v-if="sw" class="w-5/6 m-auto mt-10 overflow-y-scroll rounded-3xl bg-bgBox lg:w-1/2 h-1/2">
         <table class="w-full text-brownFont">
           <thead>
             <tr>
-              <th class="table-cell pl-10 text-2xl text-left sm:hidden">
+              <th class="table-cell pl-10 text-2xl text-left lg:hidden">
                 Your Food
               </th>
-              <th class="hidden pl-10 text-2xl text-left sm:table-cell">
+              <th class="hidden pl-10 text-2xl text-left lg:table-cell">
                 Your Food Lists
               </th>
               <th class="pr-4 text-2xl">Prices</th>
@@ -118,7 +119,7 @@ const showMenu = () => {
               <td class="pl-10 text-2xl text-left">
                 {{ food.name }}
                 <div
-                  class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
+                  class="flex flex-wrap w-24 h-20 overflow-y-scroll lg:overflow-hidden lg:flex-nowrap lg:w-36 lg:h-auto lg:overflow-x-scroll">
                   <div v-for="(person, index) in persons" key="index">
                     <span :class="['color-' + (index % 4)]" class="mr-2 text-base">{{ person.name }}</span>
                   </div>
@@ -129,7 +130,7 @@ const showMenu = () => {
                 {{ food.price / food.person.length }}
               </td>
               <td>
-                <img alt="iconEdit" class="w-5 h-5 mr-3" src="./assets/iconEdit.svg" @click="hello" />
+                <img alt="iconEdit" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg" @click="hello" />
               </td>
             </tr>
           </tbody>
@@ -159,30 +160,44 @@ const showMenu = () => {
     </div> -->
 
     <!-- Model -->
-    <div class="fixed inset-0 bg-zinc-500/50" v-show="showMenuStatus">
-
-      <div class="w-11/12 h-4/6 bg-bgPage mt-20 m-auto  rounded-[56px] flex  flex-wrap ">
-        <div class="flex w-1/2 aspect-square ">
-          <!-- <div class="w-[400px] rounded-full bg-bgList1 h-[400px]"></div> -->
-        </div>
-
-        <div class="flex flex-col ">
-          <div class="flex text-4xl text-brownFont">Your Food</div>
-          <div class="flex mt-3">
-            <!-- <input class="bg-bgbtn w-[400px] h-[64px] rounded-3xl pl-4 text-[24px] text-brownFont" type="text"
-              v-model="name" :placeholder="name" /> -->
+    <div v-show="showMenuStatus" class="fixed inset-0 bg-zinc-500/50 ">
+      <div
+        class="w-11/12  bg-bgPage mt-20 m-auto  rounded-[56px] flex  flex-wrap  justify-center lg:h-1/2 lg:mt-52 lg:p-2 max-w-3xl">
+        <div class="w-full relative top-0 right-0 h-0.5 "><img alt="" class="absolute top-0 right-0 w-5 mt-5 mr-7 "
+            src="./assets/x.svg"></div>
+        <div class="lg:flex lg:w-full lg:max-w-3xl -">
+          <div class=" my-2 flex w-[300px] m-auto lg:w-1/2">
+            <div class="rounded-full bg-bgList1 square"></div>
           </div>
-          <div class="flex text-4xl text-brownFont mt-[30px]">Add Payer</div>
-          <div class="mt-[14px]">
-            <!-- <div>{{ personSize }}</div> -->
-            <div class="flex h-6 bg-bgbtn"></div>
-          </div>
-          <div class="h-12 mt-4 bg-bgbtn"></div>
-        </div>
+          <div class="lg"></div>
+          <div class="w-full p-10 lg:w-1/2">
 
+            <div class="flex ">
+              <div class="text-2xl first-letter:flex text-brownFont">Your Food :</div>
+              <input :placeholder="name" class="w-2/4 pl-2 ml-1 text-xl bg-bgbtn rounded-xl text-brownFont"
+                type="text" />
+            </div>
+            <div class="flex text-2xl text-brownFont ">Add Payer</div>
+            <div class="flex"><img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /><span
+                class="px-3 text-2xl bg-bgbtn rounded-3xl">{{ personSize }}</span></div>
+            <div class="flex ">
+              <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
+            </div>
+
+            <div class="flex">
+              <input class="pl-2 ml-1 text-xl bg-bgbtn rounded-3xl text-brownFont" placeholder="Please add name..."
+                type="text" />
+              <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
+            </div>
+            <div class="flex justify-center">
+              <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
+            </div>
+
+          </div>
+        </div>
         <!-- <div class=""></div> -->
       </div>
-      <!-- <div class="inset-0 w-full h-full bg-black opacity-50 "></div> -->
+
     </div>
 
   </div>
@@ -219,5 +234,11 @@ button {
 .color-3 {
   background-color: #fff9e9;
   border-radius: 0.75rem;
+}
+
+.square {
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
 }
 </style>
