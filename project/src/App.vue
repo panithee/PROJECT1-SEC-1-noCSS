@@ -1,5 +1,7 @@
+
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
+
 let persons = [
   { name: "John" },
   { name: "jhon" },
@@ -53,16 +55,32 @@ const switchMenu = (e) => {
 const totalFoodLits = ref(
   foodLists.value.reduce((total, food) => total + food.price, 0)
 );
+const eventFoodList = (e, mode) => {
+  showMenu();
+  if (mode === "add") {
+    foodLists.value.push(e);
+  } else if (mode === "edit") {
+    foodLists.value[e.index] = e.food;
+  } else if (mode === "delete") {
+    foodLists.value.splice(e, 1);
+  } else {
+    console.log("Error");
+  }
+};
+const showMenuStatus = ref(true);
+const showMenu = () => {
+  showMenuStatus.value = !showMenuStatus.value;
+};
 </script>
 
 <template>
   <div class="w-screen h-screen">
-    <div class="w-full h-full bg-bgPage">
+    <!-- <div class="w-full h-full bg-bgPage">
       <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
         NO CSS
       </h1>
 
-      <div class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn" v-if="sw">
+      <div v-if="sw" class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn">
         <div class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5" @click="switchMenu('list')">
           <button class="text-xl text-white">All List</button>
         </div>
@@ -71,7 +89,7 @@ const totalFoodLits = ref(
         </div>
       </div>
 
-      <div class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn" v-else>
+      <div v-else class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn">
         <div class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchMenu('list')">
           <button class="text-xl text-brownFont">All List</button>
         </div>
@@ -81,11 +99,13 @@ const totalFoodLits = ref(
         </div>
       </div>
 
-      <div class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2 overflow-y-scroll h-1/2" v-if="sw">
+      <div v-if="sw" class="w-5/6 m-auto mt-10 overflow-y-scroll rounded-3xl bg-bgBox sm:w-1/2 h-1/2">
         <table class="w-full text-brownFont">
           <thead>
             <tr>
-              <th class="table-cell pl-10 text-left text-2xl sm:hidden">Your Food</th>
+              <th class="table-cell pl-10 text-2xl text-left sm:hidden">
+                Your Food
+              </th>
               <th class="hidden pl-10 text-2xl text-left sm:table-cell">
                 Your Food Lists
               </th>
@@ -97,37 +117,36 @@ const totalFoodLits = ref(
             <tr v-for="(food, index) in foodLists" key="index">
               <td class="pl-10 text-2xl text-left">
                 {{ food.name }}
-            <tr>
-              <div class="flex flex-wrap overflow-y-scroll w-24 h-20 sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
-                <td v-for="(person, index) in persons" key="index">
-                  <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
-                </td>
-              </div>
-            </tr>
-            </td>
-            <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
-            <td class="pr-4 text-2xl text-center">
-              {{ food.price / food.person.length }}
-            </td>
-            <td>
-              <img src="./assets/iconEdit.svg" alt="iconEdit" class="w-5 h-5 mr-3" @click="hello" />
-            </td>
+                <div
+                  class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
+                  <div v-for="(person, index) in persons" key="index">
+                    <span :class="['color-' + (index % 4)]" class="mr-2 text-base">{{ person.name }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
+              <td class="pr-4 text-2xl text-center">
+                {{ food.price / food.person.length }}
+              </td>
+              <td>
+                <img alt="iconEdit" class="w-5 h-5 mr-3" src="./assets/iconEdit.svg" @click="hello" />
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1" v-if="sw">
-        <button class="text-xl text-white">ADD</button>
+      <div v-if="sw" class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1">
+        <button class="text-xl text-white" @click="eventFoodList($event, null)">ADD</button>
       </div>
 
-      <div class="flex justify-center w-4/12 m-auto mt-5" v-if="sw">
-        <button @click="clearFoodList" class="text-xl underline text-btn1">
+      <div v-if="sw" class="flex justify-center w-4/12 m-auto mt-5">
+        <button class="text-xl underline text-btn1" @click="clearFoodList">
           Clear All
         </button>
       </div>
 
-      <div class="fixed bottom-0 w-full h-20 bg-bgFooter">
+      <div class="fixed inset-x-0 bottom-0 w-full h-20 bg-bgFooter">
         <div class="flex">
           <p class="w-1/2 text-2xl text-center pt-7">
             Total:{{ totalFoodLits }}
@@ -137,12 +156,41 @@ const totalFoodLits = ref(
           </p>
         </div>
       </div>
+    </div> -->
+
+    <!-- Model -->
+    <div class="fixed inset-0 bg-zinc-500/50" v-show="showMenuStatus">
+
+      <div class="w-11/12 h-4/6 bg-bgPage mt-20 m-auto  rounded-[56px] flex  flex-wrap ">
+        <div class="flex w-1/2 aspect-square ">
+          <!-- <div class="w-[400px] rounded-full bg-bgList1 h-[400px]"></div> -->
+        </div>
+
+        <div class="flex flex-col ">
+          <div class="flex text-4xl text-brownFont">Your Food</div>
+          <div class="flex mt-3">
+            <!-- <input class="bg-bgbtn w-[400px] h-[64px] rounded-3xl pl-4 text-[24px] text-brownFont" type="text"
+              v-model="name" :placeholder="name" /> -->
+          </div>
+          <div class="flex text-4xl text-brownFont mt-[30px]">Add Payer</div>
+          <div class="mt-[14px]">
+            <!-- <div>{{ personSize }}</div> -->
+            <div class="flex h-6 bg-bgbtn"></div>
+          </div>
+          <div class="h-12 mt-4 bg-bgbtn"></div>
+        </div>
+
+        <!-- <div class=""></div> -->
+      </div>
+      <!-- <div class="inset-0 w-full h-full bg-black opacity-50 "></div> -->
     </div>
+
   </div>
+
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+@import url(https://fonts.googleapis.com/css2?family=Itim&display=swap);
 
 h1,
 p,
