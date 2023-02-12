@@ -108,7 +108,7 @@ const doneEdit = () => {
 
   showMenu();
 };
-const showMenuStatus = ref(false);
+const showMenuStatus = ref(true);
 const showMenu = () => {
   console.log("showMenu");
   showMenuStatus.value = !showMenuStatus.value;
@@ -164,7 +164,7 @@ const showMenu = () => {
             <tr>
               <div
                 class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
-                <td v-for="(person, index) in persons" key="index">
+                <td v-for="(person, index) in foodLists[index].person" key="index">
                   <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
                 </td>
               </div>
