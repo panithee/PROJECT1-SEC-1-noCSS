@@ -65,6 +65,7 @@ const switchMenu = (e) => {
 const totalFoodLits = ref(
   foodLists.value.reduce((total, food) => total + food.price, 0)
 );
+
 </script>
 
 <template>
@@ -187,15 +188,17 @@ const totalFoodLits = ref(
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(person, index) in persons" key="index">
+            <tr v-for="(person, index) in persons" key="index" :class="person.status ? 'bg-green-400' : 'bg-red-400'" >
               <td class="text-2xl text-left pl-16">
+                <div class="mt-2">
+                  <input type="checkbox" v-model="person.status" />
                 <div>
                   <input type="checkbox" @click="change" />
                   <label class="= text-2xl"></label>
                   {{ person.name }}
                 </div>
               </td>
-              <td class="text-2xl text-center bg-person1">{{ person.price }}</td>
+              <td class="text-2xl text-center">{{ person.price }}</td>
             </tr>
           </tbody>
         </table>
