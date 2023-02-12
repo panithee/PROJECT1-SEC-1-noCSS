@@ -67,16 +67,16 @@ const eventFoodList = (e, mode) => {
     console.log("Error");
   }
 };
-const showMenuStatus = ref(true);
-// const showMenu = () => {
-//   console.log("showMenu");
-//   showMenuStatus.value = !showMenuStatus.value;
-// };
+const showMenuStatus = ref(false);
+const showMenu = () => {
+  console.log("showMenu");
+  showMenuStatus.value = !showMenuStatus.value;
+};
 </script>
 
 <template>
   <div class="w-screen h-screen">
-    <!-- <div class="w-full h-full bg-bgPage">
+     <div class="w-full h-full bg-bgPage fixed inset-x-0 top-0">
       <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
         NO CSS
       </h1>
@@ -157,17 +157,21 @@ const showMenuStatus = ref(true);
           </p>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- Model -->
-    <div v-show="showMenuStatus" class="fixed inset-0 bg-zinc-500/50 ">
+    <div class="w-full h-full  fixed " v-show="showMenuStatus" >
+    <div  class="absolute inset-0 bg-zinc-500/50  " @click="showMenu()">
+    </div>
+<div class="lg"></div>
       <div
-        class="w-11/12  bg-bgPage mt-20 m-auto  rounded-[56px] flex  flex-wrap  justify-center lg:h-1/2 lg:mt-52 lg:p-2 max-w-3xl">
+        class="relative  w-11/12  bg-bgPage  m-auto  rounded-[56px] flex  flex-wrap   lg:h-1/2 lg:mt-52 lg:p-2 max-w-3xl">
         <div class="w-full relative top-0 right-0 h-0.5 "><img alt="" class="absolute top-0 right-0 w-5 mt-5 mr-7 "
-            src="./assets/x.svg"></div>
-        <div class="lg:flex lg:w-full lg:max-w-3xl -">
+            @click="showMenu()" src="./assets/x.svg"></div>
+        <div class="w-full lg:flex lg:max-w-3xl -">
           <div class=" my-2 flex w-[300px] m-auto lg:w-1/2">
-            <div class="rounded-full bg-bgList1 square"></div>
+
+            <div class=" rounded-full bg-bgList1 square"></div>
           </div>
           <div class="lg"></div>
           <div class="w-full p-10 lg:w-1/2">
@@ -195,7 +199,7 @@ const showMenuStatus = ref(true);
 
           </div>
         </div>
-        <!-- <div class=""></div> -->
+<!--         <div class=""></div>-->
       </div>
 
     </div>
