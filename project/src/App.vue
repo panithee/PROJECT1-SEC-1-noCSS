@@ -43,6 +43,11 @@ const clearFoodList = () => {
   return foodLists;
 };
 
+const deleteAll = () => {
+  persons.value = [];
+  return persons;
+};
+
 const sw = ref(true);
 const switchMenu = (e) => {
   if (e === "list") {
@@ -114,12 +119,12 @@ const showMenu = () => {
 
 <template>
   <div class="w-screen h-screen">
-    <div class="fixed inset-x-0 top-0 w-full h-full bg-bgPage">
+    <div class="w-full h-full bg-bgPage">
       <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
         NO CSS
       </h1>
 
-      <div v-if="sw" class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn">
+      <div class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn" v-if="sw">
         <div class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5" @click="switchMenu('list')">
           <button class="text-xl text-white">All List</button>
         </div>
@@ -128,7 +133,7 @@ const showMenu = () => {
         </div>
       </div>
 
-      <div v-else class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn">
+      <div class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn" v-else>
         <div class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchMenu('list')">
           <button class="text-xl text-brownFont">All List</button>
         </div>
@@ -138,14 +143,14 @@ const showMenu = () => {
         </div>
       </div>
 
-      <div v-if="sw" class="w-5/6 m-auto mt-10 overflow-y-scroll rounded-3xl bg-bgBox lg:w-1/2 h-1/2">
+      <div class="w-5/6 m-auto mt-10 overflow-y-scroll rounded-3xl bg-bgBox sm:w-1/2 h-1/2" v-if="sw">
         <table class="w-full text-brownFont">
           <thead>
             <tr>
-              <th class="table-cell pl-10 text-2xl text-left lg:hidden">
+              <th class="table-cell pl-10 text-2xl text-left sm:hidden">
                 Your Food
               </th>
-              <th class="hidden pl-10 text-2xl text-left lg:table-cell">
+              <th class="hidden pl-10 text-2xl text-left sm:table-cell">
                 Your Food Lists
               </th>
               <th class="pr-4 text-2xl">Prices</th>
@@ -156,21 +161,23 @@ const showMenu = () => {
             <tr v-for="(food, index) in foodLists" key="index">
               <td class="pl-10 text-2xl text-left">
                 {{ food.name }}
-                <div
-                  class="flex flex-wrap w-24 h-20 overflow-y-scroll lg:overflow-hidden lg:flex-nowrap lg:w-36 lg:h-auto lg:overflow-x-scroll">
-                  <div v-for="(person, index) in foodLists[index].person" key="index">
-                    <span :class="['color-' + (index % 4)]" class="mr-2 text-base">{{ person.name }}</span>
-                  </div>
-                </div>
-              </td>
-              <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
-              <td class="pr-4 text-2xl text-center">
-                {{ food.price / food.person.length }}
-              </td>
-              <td>
-                <img alt="iconEdit" :id="index" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg"
-                  @click="eventFoodList($event, 'edit')" />
-              </td>
+            <tr>
+              <div
+                class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
+                <td v-for="(person, index) in persons" key="index">
+                  <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
+                </td>
+              </div>
+            </tr>
+            </td>
+            <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
+            <td class="pr-4 text-2xl text-center">
+              {{ food.price / food.person.length }}
+            </td>
+            <td>
+              <img alt="iconEdit" :id="index" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg"
+                @click="eventFoodList($event, 'edit')" />
+            </td>
             </tr>
           </tbody>
         </table>
@@ -186,7 +193,36 @@ const showMenu = () => {
         </button>
       </div>
 
-      <div class="fixed inset-x-0 bottom-0 w-full h-20 bg-bgFooter">
+      <div class="w-5/6 m-auto mt-10 overflow-y-scroll rounded-3xl bg-bgBox sm:w-1/2 h-1/2" v-if="!sw">
+        <table class="w-full text-brownFont">
+          <thead>
+            <tr>
+              <th class="table-cell text-2xl text-left sm:hidden pl-9">Name</th>
+              <th class="hidden text-2xl text-left pl-9 sm:table-cell">Name</th>
+              <th class="text-2xl">Prices</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(person, index) in persons" key="index">
+              <td class="pl-16 text-2xl text-left">
+                <div>
+                  <input type="checkbox" @click="change(person.name)" />
+                  <label class="= text-2xl"></label>
+                  {{ person.name }}
+                </div>
+              </td>
+              <td class="text-2xl text-center">{{ person.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div @click="deleteAll" class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1"
+        v-if="!sw">
+        <button class="text-xl text-center text-white">Delete All</button>
+      </div>
+
+      <div class="fixed bottom-0 w-full h-20 bg-bgFooter">
         <div class="flex">
           <p class="w-1/2 text-2xl text-center pt-7">
             Total:{{ totalFoodLits }}
