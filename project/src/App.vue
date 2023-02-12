@@ -19,7 +19,7 @@ let persons = [
   { name: "Oat" },
 ];
 let foodLists = ref([
-  { name: "somtum", price: 200, person: [persons[0]] },
+  { name: "somtum", price: 2020, person: [persons[0]] },
   { name: "banana", price: 200, person: [persons[0], persons[1]] },
   { name: "Kaiped", price: 200, person: [persons[0]] },
   { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
@@ -32,8 +32,8 @@ let foodLists = ref([
   { name: "Kaiped", price: 200, person: [persons[0]] },
   { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
 ]);
-let name = toRef(foodLists.value[1], 'name')
-let personSize = toRef(foodLists.value[1].person, 'length')
+// let name = toRef(foodLists.value[1], 'name')
+// let personSize = toRef(foodLists.value[1].person, 'length')
 const hello = () => {
   console.log("Hello");
 };
@@ -70,7 +70,7 @@ const eventFoodList = (e, mode) => {
     personFood.value = [];
   } if (mode === "edit") {
     modeTarget.value = "edit";
-    price.value  = foodLists.value[e.target.id].price;
+    price.value = foodLists.value[e.target.id].price;
     foodName.value = foodLists.value[e.target.id].name;
     personFood.value = foodLists.value[e.target.id].person;
     // foodLists.value[e.index] = e.food;
@@ -80,23 +80,24 @@ const eventFoodList = (e, mode) => {
   showMenu();
 };
 const doneEdit = () => {
-  if(modeTarget.value === "add"){
+  if (modeTarget.value === "add") {
     foodLists.value.push({
       name: foodName.value,
       price: price.value,
       person: personFood.value,
     });
-  } else if(modeTarget.value === "edit"){
-    foodLists.value[target] = {
-      name: foodName.value,
-      price: price.value,
-      person: personFood.value,
-    };
+  } else if (modeTarget.value === "edit") {
+
+    foodLists.value[target.value].price = price.value;
+    foodLists.value[target.value].name = foodName.value;
+    foodLists.value[target.value].person = personFood.value;
   }
   else {
     console.log("Error");
   }
   console.log(foodLists.value[target]);
+  // why foddlist not update
+
   modeTarget.value = "";
   target.value = "";
 
@@ -167,7 +168,8 @@ const showMenu = () => {
                 {{ food.price / food.person.length }}
               </td>
               <td>
-                <img alt="iconEdit" :id="index " class="w-5 h-5 mr-3" src="./assets/more-vertical.svg" @click="eventFoodList($event,'edit')" />
+                <img alt="iconEdit" :id="index" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg"
+                  @click="eventFoodList($event, 'edit')" />
               </td>
             </tr>
           </tbody>
@@ -175,7 +177,7 @@ const showMenu = () => {
       </div>
 
       <div v-if="sw" class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1">
-        <button class="text-xl text-white"  @click="eventFoodList($event, 'add')">ADD</button>
+        <button class="text-xl text-white" @click="eventFoodList($event, 'add')">ADD</button>
       </div>
 
       <div v-if="sw" class="flex justify-center w-4/12 m-auto mt-5">
@@ -198,7 +200,7 @@ const showMenu = () => {
 
     <!-- Model -->
     <div class="fixed w-full h-full " v-show="showMenuStatus">
-      <div class="absolute inset-0 bg-zinc-500/50 " @click="showMenu()">
+      <div class="absolute inset-0 bg-zinc-500/50 " @click="showMenu">
       </div>
       <div class="lg"></div>
       <div
@@ -206,11 +208,10 @@ const showMenu = () => {
         <div class="w-full relative top-0 right-0 h-0.5 "><img alt="" class="absolute top-0 right-0 w-5 mt-5 mr-7 "
             @click="showMenu()" src="./assets/x.svg"></div>
         <div class="w-full lg:flex lg:max-w-3xl -">
-          <div class="flex justify-center m-auto my-2  lg:w-1/2">
-            <div class="justify-center  scale-75 bg-red-100 rounded-full  lg:visible"
-              style="width: 390px; height: 390px;">
-            <input class="absolute flex justify-center text-xl leading-normal text-center text-gray-500"
-              style="left: 90px; top: 133px; "  v-model="price" :placeholder="price">
+          <div class="flex justify-center m-auto my-2 lg:w-1/2">
+            <div class="justify-center scale-75 bg-red-100 rounded-full" style="width: 390px; height: 390px;">
+              <input class="absolute flex justify-center text-xl leading-normal text-center text-gray-500"
+                style="left: 90px; top: 133px; " v-model="price" :placeholder="price">
             </div>
           </div>
           <div class="lg"></div>
@@ -218,8 +219,8 @@ const showMenu = () => {
 
             <div class="flex ">
               <div class="text-2xl first-letter:flex text-brownFont">Your Food :</div>
-              <input v-model="foodName" :placeholder="foodName" class="w-2/4 pl-2 ml-1 text-xl bg-bgbtn rounded-xl text-brownFont"
-                type="text" />
+              <input v-model="foodName" :placeholder="foodName"
+                class="w-2/4 pl-2 ml-1 text-xl bg-bgbtn rounded-xl text-brownFont" type="text" />
             </div>
             <div class="flex text-2xl text-brownFont ">Add Payer</div>
             <div class="flex"><img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /><span
