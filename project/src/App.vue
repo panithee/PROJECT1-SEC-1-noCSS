@@ -43,6 +43,11 @@ const clearFoodList = () => {
   return foodLists;
 };
 
+const green = ref(false)
+const change =()=>{
+  green.value = !green.value;
+}
+
 const deleteAll = () => {
   persons.value = [];
   return persons;
@@ -185,12 +190,12 @@ const totalFoodLits = ref(
             <tr v-for="(person, index) in persons" key="index">
               <td class="text-2xl text-left pl-16">
                 <div>
-                  <input type="checkbox" @click="change(person.name)" />
+                  <input type="checkbox" @click="change" />
                   <label class="= text-2xl"></label>
                   {{ person.name }}
                 </div>
               </td>
-              <td class="text-2xl text-center">{{ person.price }}</td>
+              <td class="text-2xl text-center bg-person1">{{ person.price }}</td>
             </tr>
           </tbody>
         </table>
