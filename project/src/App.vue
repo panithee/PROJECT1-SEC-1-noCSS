@@ -55,28 +55,65 @@ const switchMenu = (e) => {
 const totalFoodLits = ref(
   foodLists.value.reduce((total, food) => total + food.price, 0)
 );
+let price = ref(0);
+let foodName = ref("");
+let personFood = ref([]);
+let modeTarget = ref("");
+let target = ref("");
 const eventFoodList = (e, mode) => {
-  showMenu();
+  target.value = e.target.id;
   if (mode === "add") {
-    foodLists.value.push(e);
-  } else if (mode === "edit") {
-    foodLists.value[e.index] = e.food;
-  } else if (mode === "delete") {
-    foodLists.value.splice(e, 1);
+    modeTarget.value = "add";
+    // foodLists.value.push(e);
+    price.value = 0;
+    foodName.value = "";
+    personFood.value = [];
+  } if (mode === "edit") {
+    modeTarget.value = "edit";
+    price.value  = foodLists.value[e.target.id].price;
+    foodName.value = foodLists.value[e.target.id].name;
+    personFood.value = foodLists.value[e.target.id].person;
+    // foodLists.value[e.index] = e.food;
   } else {
     console.log("Error");
   }
+  showMenu();
+};
+const doneEdit = () => {
+  if(modeTarget.value === "add"){
+    foodLists.value.push({
+      name: foodName.value,
+      price: price.value,
+      person: personFood.value,
+    });
+  } else if(modeTarget.value === "edit"){
+    foodLists.value[target] = {
+      name: foodName.value,
+      price: price.value,
+      person: personFood.value,
+    };
+  }
+  else {
+    console.log("Error");
+  }
+  console.log(foodLists.value[target]);
+  modeTarget.value = "";
+  target.value = "";
+
+  showMenu();
 };
 const showMenuStatus = ref(false);
 const showMenu = () => {
   console.log("showMenu");
   showMenuStatus.value = !showMenuStatus.value;
 };
+
+
 </script>
 
 <template>
   <div class="w-screen h-screen">
-     <div class="w-full h-full bg-bgPage fixed inset-x-0 top-0">
+    <div class="fixed inset-x-0 top-0 w-full h-full bg-bgPage">
       <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
         NO CSS
       </h1>
@@ -120,7 +157,7 @@ const showMenu = () => {
                 {{ food.name }}
                 <div
                   class="flex flex-wrap w-24 h-20 overflow-y-scroll lg:overflow-hidden lg:flex-nowrap lg:w-36 lg:h-auto lg:overflow-x-scroll">
-                  <div v-for="(person, index) in persons" key="index">
+                  <div v-for="(person, index) in foodLists[index].person" key="index">
                     <span :class="['color-' + (index % 4)]" class="mr-2 text-base">{{ person.name }}</span>
                   </div>
                 </div>
@@ -130,7 +167,7 @@ const showMenu = () => {
                 {{ food.price / food.person.length }}
               </td>
               <td>
-                <img alt="iconEdit" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg" @click="hello" />
+                <img alt="iconEdit" :id="index " class="w-5 h-5 mr-3" src="./assets/more-vertical.svg" @click="eventFoodList($event,'edit')" />
               </td>
             </tr>
           </tbody>
@@ -138,7 +175,7 @@ const showMenu = () => {
       </div>
 
       <div v-if="sw" class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1">
-        <button class="text-xl text-white" @click="eventFoodList($event, null)">ADD</button>
+        <button class="text-xl text-white"  @click="eventFoodList($event, 'add')">ADD</button>
       </div>
 
       <div v-if="sw" class="flex justify-center w-4/12 m-auto mt-5">
@@ -160,30 +197,33 @@ const showMenu = () => {
     </div>
 
     <!-- Model -->
-    <div class="w-full h-full  fixed " v-show="showMenuStatus" >
-    <div  class="absolute inset-0 bg-zinc-500/50  " @click="showMenu()">
-    </div>
-<div class="lg"></div>
+    <div class="fixed w-full h-full " v-show="showMenuStatus">
+      <div class="absolute inset-0 bg-zinc-500/50 " @click="showMenu()">
+      </div>
+      <div class="lg"></div>
       <div
         class="relative  w-11/12  bg-bgPage  m-auto  rounded-[56px] flex  flex-wrap   lg:h-1/2 lg:mt-52 lg:p-2 max-w-3xl">
         <div class="w-full relative top-0 right-0 h-0.5 "><img alt="" class="absolute top-0 right-0 w-5 mt-5 mr-7 "
             @click="showMenu()" src="./assets/x.svg"></div>
         <div class="w-full lg:flex lg:max-w-3xl -">
-          <div class=" my-2 flex w-[300px] m-auto lg:w-1/2">
-
-            <div class=" rounded-full bg-bgList1 square"></div>
+          <div class="flex justify-center m-auto my-2  lg:w-1/2">
+            <div class="justify-center  scale-75 bg-red-100 rounded-full  lg:visible"
+              style="width: 390px; height: 390px;">
+            <input class="absolute flex justify-center text-xl leading-normal text-center text-gray-500"
+              style="left: 90px; top: 133px; "  v-model="price" :placeholder="price">
+            </div>
           </div>
           <div class="lg"></div>
           <div class="w-full p-10 lg:w-1/2">
 
             <div class="flex ">
               <div class="text-2xl first-letter:flex text-brownFont">Your Food :</div>
-              <input :placeholder="name" class="w-2/4 pl-2 ml-1 text-xl bg-bgbtn rounded-xl text-brownFont"
+              <input v-model="foodName" :placeholder="foodName" class="w-2/4 pl-2 ml-1 text-xl bg-bgbtn rounded-xl text-brownFont"
                 type="text" />
             </div>
             <div class="flex text-2xl text-brownFont ">Add Payer</div>
             <div class="flex"><img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /><span
-                class="px-3 text-2xl bg-bgbtn rounded-3xl">{{ personSize }}</span></div>
+                class="px-3 text-2xl bg-bgbtn rounded-3xl">{{ personFood.length ?? 0 }}</span></div>
             <div class="flex ">
               <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
             </div>
@@ -194,12 +234,12 @@ const showMenu = () => {
               <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
             </div>
             <div class="flex justify-center">
-              <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
+              <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1 " @click="doneEdit()">Done</button>
             </div>
 
           </div>
         </div>
-<!--         <div class=""></div>-->
+        <!--         <div class=""></div>-->
       </div>
 
     </div>
