@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 
-let persons = [
+let persons = ref([
   { name: "John", price: 200, status: false  },
   { name: "jhon", price: 200, status: false  },
   { name: "Prim", price: 200, status: false },
@@ -17,7 +17,8 @@ let persons = [
   { name: "Mo", price: 200, status: false  },
   { name: "Eve", price: 200, status: false  },
   { name: "Oat", price: 200, status: false },
-];
+]);
+
 let foodLists = ref([
   { name: "somtum", price: 200, person: [persons[0]] },
   { name: "banana", price: 200, person: [persons[0], persons[1]] },
@@ -40,6 +41,11 @@ const hello = () => {
 const clearFoodList = () => {
   foodLists.value = [];
   return foodLists;
+};
+
+const deleteAll = () => {
+  persons.value = [];
+  return persons;
 };
 
 const sw = ref(true);
