@@ -1,22 +1,24 @@
 <script setup>
 import { ref, computed } from "vue";
-let persons = [
-  { name: "John" },
-  { name: "jhon" },
-  { name: "Prim" },
-  { name: "Henry" },
-  { name: "Mo" },
-  { name: "Eve" },
-  { name: "Oat" },
-  { name: "Henry" },
-  { name: "Mo" },
-  { name: "Eve" },
-  { name: "Oat" },
-  { name: "Henry" },
-  { name: "Mo" },
-  { name: "Eve" },
-  { name: "Oat" },
-];
+
+let persons = ref([
+  { name: "John", price: 200, status: false  },
+  { name: "jhon", price: 200, status: false  },
+  { name: "Prim", price: 200, status: false },
+  { name: "Henry" ,price: 200, status: false  },
+  { name: "Mo", price: 200, status: false },
+  { name: "Eve", price: 200, status: false},
+  { name: "Oat", price: 200, status: false},
+  { name: "Henry", price: 200, status: false},
+  { name: "Mo", price: 200, status: false},
+  { name: "Eve", price: 200, status: false},
+  { name: "Oat", price: 200, status: false},
+  { name: "Henry", price: 200, status: false  },
+  { name: "Mo", price: 200, status: false  },
+  { name: "Eve", price: 200, status: false  },
+  { name: "Oat", price: 200, status: false },
+]);
+
 let foodLists = ref([
   { name: "somtum", price: 200, person: [persons[0]] },
   { name: "banana", price: 200, person: [persons[0], persons[1]] },
@@ -41,6 +43,11 @@ const clearFoodList = () => {
   return foodLists;
 };
 
+const deleteAll = () => {
+  persons.value = [];
+  return persons;
+};
+
 const sw = ref(true);
 const switchMenu = (e) => {
   if (e === "list") {
@@ -58,34 +65,58 @@ const totalFoodLits = ref(
 <template>
   <div class="w-screen h-screen">
     <div class="w-full h-full bg-bgPage">
-      <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
+      <h1
+        class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow"
+      >
         NO CSS
       </h1>
 
-      <div class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn" v-if="sw">
-        <div class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5" @click="switchMenu('list')">
+      <div
+        class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
+        v-if="sw"
+      >
+        <div
+          class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5"
+          @click="switchMenu('list')"
+        >
           <button class="text-xl text-white">All List</button>
         </div>
-        <div class="flex justify-center w-1/2 my-1 mr-1 rounded-full" @click="switchMenu('person')">
+        <div
+          class="flex justify-center w-1/2 my-1 mr-1 rounded-full"
+          @click="switchMenu('person')"
+        >
           <button class="text-xl text-brownFont">Per Person</button>
         </div>
       </div>
 
-      <div class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn" v-else>
-        <div class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchMenu('list')">
+      <div
+        class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
+        v-else
+      >
+        <div
+          class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer"
+          @click="switchMenu('list')"
+        >
           <button class="text-xl text-brownFont">All List</button>
         </div>
-        <div class="flex justify-center w-1/2 my-1 mr-1 rounded-full cursor-pointer bg-btn1"
-          @click="switchMenu('person')">
+        <div
+          class="flex justify-center w-1/2 my-1 mr-1 rounded-full cursor-pointer bg-btn1"
+          @click="switchMenu('person')"
+        >
           <button class="text-xl text-white">Per Person</button>
         </div>
       </div>
 
-      <div class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2 overflow-y-scroll h-1/2" v-if="sw">
+      <div
+        class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2 overflow-y-scroll h-1/2"
+        v-if="sw"
+      >
         <table class="w-full text-brownFont">
           <thead>
             <tr>
-              <th class="table-cell pl-10 text-left text-2xl sm:hidden">Your Food</th>
+              <th class="table-cell pl-10 text-left text-2xl sm:hidden">
+                Your Food
+              </th>
               <th class="hidden pl-10 text-2xl text-left sm:table-cell">
                 Your Food Lists
               </th>
@@ -97,27 +128,41 @@ const totalFoodLits = ref(
             <tr v-for="(food, index) in foodLists" key="index">
               <td class="pl-10 text-2xl text-left">
                 {{ food.name }}
-            <tr>
-              <div class="flex flex-wrap overflow-y-scroll w-24 h-20 sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
-                <td v-for="(person, index) in persons" key="index">
-                  <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
-                </td>
-              </div>
-            </tr>
-            </td>
-            <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
-            <td class="pr-4 text-2xl text-center">
-              {{ food.price / food.person.length }}
-            </td>
-            <td>
-              <img src="./assets/iconEdit.svg" alt="iconEdit" class="w-5 h-5 mr-3" @click="hello" />
-            </td>
+                <tr>
+                  <div
+                    class="flex flex-wrap overflow-y-scroll w-24 h-20 sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll"
+                  >
+                    <td v-for="(person, index) in persons" key="index">
+                      <span
+                        class="mr-2 text-base"
+                        :class="['color-' + (index % 4)]"
+                        >{{ person.name }}</span
+                      >
+                    </td>
+                  </div>
+                </tr>
+              </td>
+              <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
+              <td class="pr-4 text-2xl text-center">
+                {{ food.price / food.person.length }}
+              </td>
+              <td>
+                <img
+                  src="./assets/iconEdit.svg"
+                  alt="iconEdit"
+                  class="w-5 h-5 mr-3"
+                  @click="hello"
+                />
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1" v-if="sw">
+      <div
+        class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1"
+        v-if="sw"
+      >
         <button class="text-xl text-white">ADD</button>
       </div>
 
@@ -125,6 +170,38 @@ const totalFoodLits = ref(
         <button @click="clearFoodList" class="text-xl underline text-btn1">
           Clear All
         </button>
+      </div>
+
+      <div class="m-auto mt-10 rounded-3xl bg-bgBox w-5/6 sm:w-1/2 overflow-y-scroll h-1/2" v-if="!sw">
+        <table class="w-full text-brownFont">
+          <thead>
+            <tr>
+              <th class="table-cell text-2xl sm:hidden text-left pl-9">Name</th>
+              <th class="text-2xl text-left pl-9 hidden sm:table-cell">Name</th>
+              <th class="text-2xl">Prices</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(person, index) in persons" key="index">
+              <td class="text-2xl text-left pl-16">
+                <div>
+                  <input type="checkbox" @click="change(person.name)" />
+                  <label class="= text-2xl"></label>
+                  {{ person.name }}
+                </div>
+              </td>
+              <td class="text-2xl text-center">{{ person.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        @click="deleteAll"
+        class="flex items-center justify-center m-auto mt-5 bg-btn1 w-2/12 h-12 rounded-full"
+        v-if="!sw"
+      >
+        <button class="text-white text-center text-xl">Delete All</button>
       </div>
 
       <div class="fixed bottom-0 w-full h-20 bg-bgFooter">
