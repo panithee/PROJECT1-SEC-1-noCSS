@@ -192,6 +192,7 @@ const totalFoodLits = ref(
               <td class="text-2xl text-left pl-16">
                 <div class="mt-2">
                   <input type="checkbox" v-model="person.status" />
+                </div>
                 <div>
                   <input type="checkbox" @click="change" />
                   <label class="= text-2xl"></label>
