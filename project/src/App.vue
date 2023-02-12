@@ -67,6 +67,28 @@ const totalFoodLits = ref(
           <button class="text-xl text-white">All List</button>
         </div>
         <div class="flex justify-center w-1/2 my-1 mr-1 rounded-full" @click="switchMenu('person')">
+  <div class="w-screen h-screen bg-bgPage">
+    <div class="w-full h-full">
+      <h1
+        class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow"
+      >
+        NO CSS
+      </h1>
+
+      <div
+        class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
+        v-if="sw"
+      >
+        <div
+          class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5"
+          @click="switchMenu('list')"
+        >
+          <button class="text-xl text-white">All List</button>
+        </div>
+        <div
+          class="flex justify-center w-1/2 my-1 mr-1 rounded-full"
+          @click="switchMenu('person')"
+        >
           <button class="text-xl text-brownFont">Per Person</button>
         </div>
       </div>
@@ -77,6 +99,20 @@ const totalFoodLits = ref(
         </div>
         <div class="flex justify-center w-1/2 my-1 mr-1 rounded-full cursor-pointer bg-btn1"
           @click="switchMenu('person')">
+      <div
+        class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
+        v-else
+      >
+        <div
+          class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer"
+          @click="switchMenu('list')"
+        >
+          <button class="text-xl text-brownFont">All List</button>
+        </div>
+        <div
+          class="flex justify-center w-1/2 my-1 mr-1 rounded-full cursor-pointer bg-btn1"
+          @click="switchMenu('person')"
+        >
           <button class="text-xl text-white">Per Person</button>
         </div>
       </div>
@@ -86,6 +122,11 @@ const totalFoodLits = ref(
           <thead>
             <tr>
               <th class="table-cell pl-10 text-left text-2xl sm:hidden">Your Food</th>
+      <div class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2" v-if="sw">
+        <table class="w-full text-brownFont">
+          <thead>
+            <tr>
+              <th class="table-cell pl-5 text-2xl sm:hidden">Your Food</th>
               <th class="hidden pl-10 text-2xl text-left sm:table-cell">
                 Your Food Lists
               </th>
@@ -112,12 +153,40 @@ const totalFoodLits = ref(
             <td>
               <img src="./assets/iconEdit.svg" alt="iconEdit" class="w-5 h-5 mr-3" @click="hello" />
             </td>
+                <tr>
+                  <div class="w-1/2 overflow-x-scroll">
+                    <td v-for="(person, index) in persons" key="index">
+                      <span
+                        class="mr-2 text-base"
+                        :class="['color-' + (index % 4)]"
+                        >{{ person.name }}</span
+                      >
+                    </td>
+                  </div>
+                </tr>
+              </td>
+              <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
+              <td class="pr-4 text-2xl text-center">
+                {{ food.price / food.person.length }}
+              </td>
+              <td>
+                <img
+                  src="./assets/iconEdit.svg"
+                  alt="iconEdit"
+                  class="w-5 h-5 mr-3"
+                  @click="hello"
+                />
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <div class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1" v-if="sw">
+      <div
+        class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1"
+        v-if="sw"
+      >
         <button class="text-xl text-white">ADD</button>
       </div>
 
@@ -137,6 +206,7 @@ const totalFoodLits = ref(
           </p>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
