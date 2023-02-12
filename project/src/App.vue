@@ -20,6 +20,16 @@ let persons = [
 let foodLists = ref([
   { name: "somtum", price: 200, person: [persons[0]] },
   { name: "banana", price: 200, person: [persons[0], persons[1]] },
+  { name: "Kaiped", price: 200, person: [persons[0]] },
+  { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
+  { name: "somtum", price: 200, person: [persons[0]] },
+  { name: "banana", price: 200, person: [persons[0], persons[1]] },
+  { name: "Kaiped", price: 200, person: [persons[0]] },
+  { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
+  { name: "somtum", price: 200, person: [persons[0]] },
+  { name: "banana", price: 200, person: [persons[0], persons[1]] },
+  { name: "Kaiped", price: 200, person: [persons[0]] },
+  { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
 ]);
 
 const hello = () => {
@@ -46,6 +56,17 @@ const totalFoodLits = ref(
 </script>
 
 <template>
+  <div class="w-screen h-screen">
+    <div class="w-full h-full bg-bgPage">
+      <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
+        NO CSS
+      </h1>
+
+      <div class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn" v-if="sw">
+        <div class="flex justify-center w-1/2 bg-btn1 rounded-full my-1 ml-1 mr-0.5" @click="switchMenu('list')">
+          <button class="text-xl text-white">All List</button>
+        </div>
+        <div class="flex justify-center w-1/2 my-1 mr-1 rounded-full" @click="switchMenu('person')">
   <div class="w-screen h-screen bg-bgPage">
     <div class="w-full h-full">
       <h1
@@ -72,6 +93,12 @@ const totalFoodLits = ref(
         </div>
       </div>
 
+      <div class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn" v-else>
+        <div class="flex justify-center w-1/2 rounded-full my-1 ml-1 mr-0.5 cursor-pointer" @click="switchMenu('list')">
+          <button class="text-xl text-brownFont">All List</button>
+        </div>
+        <div class="flex justify-center w-1/2 my-1 mr-1 rounded-full cursor-pointer bg-btn1"
+          @click="switchMenu('person')">
       <div
         class="flex items-center w-1/2 m-auto mt-10 rounded-full bg-bgbtn"
         v-else
@@ -90,6 +117,11 @@ const totalFoodLits = ref(
         </div>
       </div>
 
+      <div class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2 overflow-y-scroll h-1/2" v-if="sw">
+        <table class="w-full text-brownFont">
+          <thead>
+            <tr>
+              <th class="table-cell pl-10 text-left text-2xl sm:hidden">Your Food</th>
       <div class="w-5/6 m-auto mt-10 rounded-3xl bg-bgBox sm:w-1/2" v-if="sw">
         <table class="w-full text-brownFont">
           <thead>
@@ -106,6 +138,21 @@ const totalFoodLits = ref(
             <tr v-for="(food, index) in foodLists" key="index">
               <td class="pl-10 text-2xl text-left">
                 {{ food.name }}
+            <tr>
+              <div class="flex flex-wrap overflow-y-scroll w-24 h-20 sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
+                <td v-for="(person, index) in persons" key="index">
+                  <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
+                </td>
+              </div>
+            </tr>
+            </td>
+            <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
+            <td class="pr-4 text-2xl text-center">
+              {{ food.price / food.person.length }}
+            </td>
+            <td>
+              <img src="./assets/iconEdit.svg" alt="iconEdit" class="w-5 h-5 mr-3" @click="hello" />
+            </td>
                 <tr>
                   <div class="w-1/2 overflow-x-scroll">
                     <td v-for="(person, index) in persons" key="index">
@@ -135,6 +182,7 @@ const totalFoodLits = ref(
         </table>
       </div>
 
+      <div class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1" v-if="sw">
       <div
         class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1"
         v-if="sw"
@@ -159,12 +207,6 @@ const totalFoodLits = ref(
         </div>
       </div>
     </div>
-    // pop-up
-    <div v-if="toggleOverlay">
-      <!-- <div
-        class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50"
-      ></div> -->
-      <div class="fixed w-7/12 m-auto bg-slate-400 h-1/2"></div>
     </div>
   </div>
 </template>
@@ -195,6 +237,7 @@ button {
   background-color: #ffe9ee;
   border-radius: 0.75rem;
 }
+
 .color-3 {
   background-color: #fff9e9;
   border-radius: 0.75rem;
