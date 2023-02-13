@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRef } from "vue";
+import { ref } from "vue";
 
 let persons = [
   { name: "John" },
@@ -32,11 +32,8 @@ let foodLists = ref([
   { name: "Kaiped", price: 200, person: [persons[0]] },
   { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
 ]);
-// let name = toRef(foodLists.value[1], 'name')
-// let personSize = toRef(foodLists.value[1].person, 'length')
-const hello = () => {
-  console.log("Hello");
-};
+
+
 
 const clearFoodList = () => {
   foodLists.value = [];
@@ -69,7 +66,6 @@ const eventFoodList = (e, mode) => {
   target.value = e.target.id;
   if (mode === "add") {
     modeTarget.value = "add";
-    // foodLists.value.push(e);
     price.value = 0;
     foodName.value = "";
     personFood.value = [];
@@ -161,14 +157,14 @@ const showMenu = () => {
             <tr v-for="(food, index) in foodLists" key="index">
               <td class="pl-10 text-2xl text-left">
                 {{ food.name }}
-            <tr>
+
               <div
                 class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
-                <td v-for="(person, index) in foodLists[index].person" key="index">
+                <div v-for="(person, index) in foodLists[index].person" key="index">
                   <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
-                </td>
+                </div>
               </div>
-            </tr>
+
             </td>
             <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
             <td class="pr-4 text-2xl text-center">
@@ -293,7 +289,7 @@ tr,
 th,
 td,
 button {
-  font-family: "Itim";
+  font-family: "Itim",serif;
 }
 
 .color-0 {
