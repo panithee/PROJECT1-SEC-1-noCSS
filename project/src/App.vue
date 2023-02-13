@@ -158,22 +158,22 @@ const showMenu = () => {
               <td class="pl-10 text-2xl text-left">
                 {{ food.name }}
 
-              <div
-                class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
-                <div v-for="(person, index) in foodLists[index].person" key="index">
-                  <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
+                <div
+                  class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
+                  <div v-for="(person, index) in foodLists[index].person" key="index">
+                    <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
+                  </div>
                 </div>
-              </div>
 
-            </td>
-            <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
-            <td class="pr-4 text-2xl text-center">
-              {{ food.price / food.person.length }}
-            </td>
-            <td>
-              <img alt="iconEdit" :id="index" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg"
-                @click="eventFoodList($event, 'edit')" />
-            </td>
+              </td>
+              <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
+              <td class="pr-4 text-2xl text-center">
+                {{ food.price / food.person.length }}
+              </td>
+              <td>
+                <img alt="iconEdit" :id="index" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg"
+                  @click="eventFoodList($event, 'edit')" />
+              </td>
             </tr>
           </tbody>
         </table>
@@ -199,10 +199,10 @@ const showMenu = () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(person, index) in persons" key="index">
+            <tr v-for="(person, index) in persons" key="index" :class="person.status ? 'bg-checkboxGreen' : 'bg-bgBox'">
               <td class="pl-16 text-2xl text-left">
-                <div>
-                  <input type="checkbox" @click="change(person.name)" />
+                <div class="mt-2">
+                  <input type="checkbox" v-model="person.status" />
                   <label class="= text-2xl"></label>
                   {{ person.name }}
                 </div>
@@ -289,7 +289,7 @@ tr,
 th,
 td,
 button {
-  font-family: "Itim",serif;
+  font-family: "Itim", serif;
 }
 
 .color-0 {
