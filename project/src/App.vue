@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRef } from "vue";
+import { ref, toRef , toRefs} from "vue";
 
 let persons = [
   { name: "John" },
@@ -33,7 +33,11 @@ let foodLists = ref([
   { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
 ]);
 let name = toRef(foodLists.value[1], 'name')
+
 let personSize = toRef(foodLists.value[1].person, 'length')
+
+let personInList = toRef(foodLists.value[1], 'person.name')
+
 const hello = () => {
   console.log("Hello");
 };
@@ -113,7 +117,7 @@ const showMenu = () => {
 
 <template>
   <div class="w-screen h-screen">
-    <div class="fixed inset-x-0 top-0 w-full h-full bg-bgPage">
+    <div class="w-full h-full bg-bgPage fixed inset-x-0 top-0">
       <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
         NO CSS
       </h1>
@@ -197,51 +201,60 @@ const showMenu = () => {
     </div>
 
     <!-- Model -->
-    <div class="fixed w-full h-full " v-show="showMenuStatus">
-      <div class="absolute inset-0 bg-zinc-500/50 " @click="showMenu()">
-      </div>
-      <div class="lg"></div>
-      <div
-        class="relative  w-11/12  bg-bgPage  m-auto  rounded-[56px] flex  flex-wrap   lg:h-1/2 lg:mt-52 lg:p-2 max-w-3xl">
-        <div class="w-full relative top-0 right-0 h-0.5 "><img alt="" class="absolute top-0 right-0 w-5 mt-5 mr-7 "
-            @click="showMenu()" src="./assets/x.svg"></div>
-        <div class="w-full lg:flex lg:max-w-3xl -">
-          <div class="flex justify-center m-auto my-2  lg:w-1/2">
-            <div class="justify-center  scale-75 bg-red-100 rounded-full  lg:visible"
-              style="width: 390px; height: 390px;">
-            <input class="absolute flex justify-center text-xl leading-normal text-center text-gray-500"
-              style="left: 90px; top: 133px; "  v-model="price" :placeholder="price">
+    <div class="w-full h-full  fixed " v-show="showMenuStatus">
+      <!-- <div class="absolute inset-0 bg-zinc-500/50  " @click="showMenu()"> -->
+      <div class="flex items-center justify-center h-screen bg-[#FFF7F0] bg-opacity-70" @click="showMenu()">
+
+        <div class="lg"></div>
+        <!-- <div class="relative  w-11/12  bg-bgPage rounded-[56px] flex  flex-wrap   lg:h-1/2 lg:mt-52 lg:p-2 max-w-3xl"> -->
+        <div class="flex flex-col w-[776px] h-[408px] bg-bgPage rounded-[56px]">
+          <!-- grid grid-cols-2 -->
+          <!-- <div class="w-full relative top-0 right-0 h-0.5 "><img alt="" class="absolute top-0 right-0 w-5 mt-5 mr-7 "
+            @click="showMenu()" src="./assets/x.svg"></div> -->
+          <div class="flex w-full h-[64px] justify-end"><img alt="" class="w-10 mt-6 mr-6 " @click="showMenu()"
+              src="./assets/x.svg"></div>
+
+          <div class="w-full lg:flex lg:max-w-3xl -">
+            <!-- <div class="flex w-[300px] m-auto lg:w-1/2"> -->
+            <div class="flex pl-14 pr-7">
+              <div class="rounded-full bg-bgList1 w-[304px] h-[304px]"></div>
+            </div>
+            <!-- <div class="lg"></div> -->
+            <div class="w-full  pl-7 lg:w-1/2">
+
+              <div class="text-2xl first-letter:flex text-brownFont">Your Food</div>
+              <!-- <input :placeholder="name" class="w-2/4 pl-2 ml-1 text-xl bg-bgbtn rounded-xl text-brownFont"
+                type="text" /> -->
+              <input :placeholder="name"
+                class="mt-2 bg-bgbtn w-[304px] h-[56px] rounded-3xl pl-4 text-[24px] text-brownFont" type="text" />
+
+              <div class="mt-2 flex text-2xl text-brownFont ">Add Payer</div>
+              <div class="mt-2 flex"><img alt="iconEdit" class="h-7" src="./assets/PersonCount.svg" /><span
+                  class="pl-2 pr-3 text-xl bg-bgbtn rounded-tr-xl rounded-br-xl">{{ personSize }}</span></div>
+
+              <!-- <div class="flex ">
+              <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
+            </div> -->
+
+            <div class="mt-2 bg-bgbtn px-2">
+              <div><img class="h-6" src="./assets/nonPerson .png" alt=""></div>
+            </div>
+
+              <div class="flex">
+                <input class="mt-2 text-xl bg-bgbtn rounded-3xl text-brownFont" placeholder="Please add name..."
+                  type="text" />
+                <!-- <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /> -->
+              </div>
+
+              <!-- <div class="flex justify-center">
+              <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
+            </div> -->
+
             </div>
           </div>
-          <div class="lg"></div>
-          <div class="w-full p-10 lg:w-1/2">
-
-            <div class="flex ">
-              <div class="text-2xl first-letter:flex text-brownFont">Your Food :</div>
-              <input v-model="foodName" :placeholder="foodName" class="w-2/4 pl-2 ml-1 text-xl bg-bgbtn rounded-xl text-brownFont"
-                type="text" />
-            </div>
-            <div class="flex text-2xl text-brownFont ">Add Payer</div>
-            <div class="flex"><img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /><span
-                class="px-3 text-2xl bg-bgbtn rounded-3xl">{{ personFood.length ?? 0 }}</span></div>
-            <div class="flex ">
-              <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
-            </div>
-
-            <div class="flex">
-              <input class="pl-2 ml-1 text-xl bg-bgbtn rounded-3xl text-brownFont" placeholder="Please add name..."
-                type="text" />
-              <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
-            </div>
-            <div class="flex justify-center">
-              <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1 " @click="doneEdit()">Done</button>
-            </div>
-
-          </div>
+          <!--         <div class=""></div>-->
         </div>
-        <!--         <div class=""></div>-->
       </div>
-
     </div>
 
   </div>
