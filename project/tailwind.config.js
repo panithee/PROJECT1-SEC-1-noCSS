@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        itim: "'Itim', cursive"
+        itim: ['Itim']
       },
 
       colors: {

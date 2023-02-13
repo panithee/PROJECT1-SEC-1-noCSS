@@ -287,8 +287,6 @@ const showMenu = () => {
 </template>
 
 <style scoped>
-@import url(https://fonts.googleapis.com/css2?family=Itim&display=swap);
-
 h1,
 p,
 tr,
