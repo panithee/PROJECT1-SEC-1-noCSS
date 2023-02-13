@@ -183,7 +183,7 @@ const totalFoodLits = ref(
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(person, index) in persons" key="index" :class="person.status ? 'bg-green-400' : 'bg-red-400'" >
+            <tr v-for="(person, index) in persons" key="index" :class="person.status ? 'bg-checkboxGreen' : 'bg-bgBox'" >
               <td class="text-2xl text-left pl-16">
                 <div class="mt-2">
                   <input type="checkbox" v-model="person.status" />
