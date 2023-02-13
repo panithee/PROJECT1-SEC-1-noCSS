@@ -101,14 +101,14 @@ const doneEdit = () => {
     console.log("Error");
   }
   console.log(foodLists.value[target]);
-  // why foddlist not update
+
 
   modeTarget.value = "";
   target.value = "";
 
   showMenu();
 };
-const showMenuStatus = ref(true);
+const showMenuStatus = ref(false);
 const showMenu = () => {
   console.log("showMenu");
   showMenuStatus.value = !showMenuStatus.value;
@@ -119,7 +119,7 @@ const showMenu = () => {
 
 <template>
   <div class="w-screen h-screen">
-    <div class="w-full h-full bg-bgPage">
+    <div class="absolute w-full h-full bg-bgPage">
       <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
         NO CSS
       </h1>
@@ -236,6 +236,7 @@ const showMenu = () => {
 
     <!-- Model -->
     <div class="fixed w-full h-full " v-show="showMenuStatus">
+
       <div class="absolute inset-0 bg-zinc-500/50 " @click="showMenu">
       </div>
       <div class="lg"></div>
