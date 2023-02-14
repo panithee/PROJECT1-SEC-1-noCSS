@@ -162,7 +162,7 @@ const showMenu = () => {
                 <div
                   class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
                   <div v-for="(person, index) in foodLists[index].person" key="index">
-                    <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
+                    <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ persons.name }}</span>
                   </div>
                 </div>
 
