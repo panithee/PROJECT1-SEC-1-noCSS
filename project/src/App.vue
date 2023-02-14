@@ -65,7 +65,7 @@ const totalFoodLits = ref(
 
 <template>
   <div class="w-screen h-screen">
-    <div class="w-full h-full bg-bgPage">
+    <div class="absolute w-full h-full bg-bgPage">
       <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
         NO CSS
       </h1>
