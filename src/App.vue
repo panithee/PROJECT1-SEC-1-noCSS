@@ -200,7 +200,7 @@ const showMenu = () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(person, index) in persons" key="index" :class="person.status ? 'bg-checkboxGreen' : 'bg-bgBox'">
+            <tr v-for="(person, index) in persons" key="index" :class="person.status ? 'bg-checkboxGreen' : 'bg-bgBox'" @click="person.status = !person.status" ref="person.status">
               <td class="pl-16 text-2xl text-left">
                 <div class="mt-2">
                   <input type="checkbox" v-model="person.status" />
@@ -274,7 +274,6 @@ const showMenu = () => {
 
           </div>
         </div>
-        <!--         <div class=""></div>-->
       </div>
 
     </div>
