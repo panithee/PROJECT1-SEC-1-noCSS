@@ -111,6 +111,15 @@ const showMenu = () => {
   console.log("showMenu");
   showMenuStatus.value = !showMenuStatus.value;
 };
+
+const doneBtn = () => {
+  
+}
+
+const deletBrn = () => {
+  
+}
+
 </script>
 
 <template>
@@ -246,31 +255,36 @@ const showMenu = () => {
     <div class="w-full h-full fixed" v-show="showMenuStatus">
       <!-- <div class="absolute inset-0 bg-zinc-500/50  " @click="showMenu()"> -->
       <div
-        class="flex items-center justify-center h-screen bg-[#FFF7F0] bg-opacity-70"
-        @click="showMenu()"
-      >
+        class="flex items-center justify-center h-screen bg-[#FFF7F0] bg-opacity-70">
         <div class="lg"></div>
         <!-- <div class="relative  w-11/12  bg-bgPage rounded-[56px] flex  flex-wrap   lg:h-1/2 lg:mt-52 lg:p-2 max-w-3xl"> -->
-        <div class="flex flex-col w-[776px] h-[408px] bg-bgPage rounded-[56px]">
+        <div class="flex flex-col w-[776px] h-[448px] bg-bgPage rounded-[40px]">
           <!-- grid grid-cols-2 -->
           <!-- <div class="w-full relative top-0 right-0 h-0.5 "><img alt="" class="absolute top-0 right-0 w-5 mt-5 mr-7 "
             @click="showMenu()" src="./assets/x.svg"></div> -->
-          <div class="flex w-full h-[64px] justify-end">
+          <div class="flex w-full h-[44px] justify-end">
             <img
               alt=""
-              class="w-10 mt-6 mr-6"
+              class="w-10 h-10 mt-4 mr-4"
               @click="showMenu()"
               src="./assets/x.svg"
             />
           </div>
-        
+
           <div class="lg:flex lg:max-w-3xl -">
             <!-- <div class="flex w-[300px] m-auto lg:w-1/2"> -->
             <div class="flex pl-14 pr-7">
-              <div class="flex flex-col items-center rounded-full bg-bgList1 w-[304px] h-[304px]">
-                <div class="flex justify-center"><input type="number" class="h-[168px] w-[296px] rounded-t-full bg-bgList1"></div>
-                <div class="mt-3 w-[288px] border-b border-brownFont"></div>
-                <div class="">AVG price</div>
+              <div
+                class="flex flex-col items-center rounded-full bg-bgList1 w-[304px] h-[304px]"
+              >
+                <div class="flex justify-center items-center h-[168px] w-[296px] rounded-t-full bg-bgList1">
+                  <input
+                    type="number"
+                    class="h-[48px] w-[200px] text-center mt-12 text-[48px] bg-bgList1 text-brownFont"
+                  />
+                </div>
+                <div class="mt-3 w-[240px] border-b border-brownFont"></div>
+                <div class="mt-[88px]">AVG price</div>
               </div>
             </div>
             <!-- <div class="lg"></div> -->
@@ -282,7 +296,7 @@ const showMenu = () => {
                 type="text" /> -->
               <input
                 :placeholder="name"
-                class="mt-2 bg-bgbtn w-[304px] h-[48px] rounded-3xl pl-4 text-[24px] text-brownFont"
+                class="mt-2 bg-bgbtn w-[304px] h-[48px] rounded-[20px] pl-4 text-[24px] text-brownFont"
                 type="text"
               />
 
@@ -302,27 +316,26 @@ const showMenu = () => {
               <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
             </div> -->
 
-              <div class="mt-2 bg-bgbtn px-2">
-                <div class="">something</div>
+              <div class="flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl">
+                <div class="flex justify-center items-center h-9 mx-2 my-2 px-2 bg-teal-200 rounded-2xl">somethinggg</div>
               </div>
-              <div class="flex flex-row mt-2">
+
+              <div class="flex flex-row mt-4">
                 <input
-                  class="h-8 pl-4 text-xl bg-bgbtn rounded-xl text-brownFont"
+                  class="h-8 w-[224px] pl-4 text-xl bg-bgbtn rounded-xl text-brownFont"
                   placeholder="Please add name..."
                   type="text"
                 />
-                <img class="h-8 ml-3" src="./assets/addPersonBtn.svg" alt="" />
+                <button><img class="h-8 ml-3" src="./assets/addPersonBtn.svg" alt="" /></button>
               </div>
 
               <div class="flex flex-row mt-5">
                 <button
-                  class="h-[56px] w-[106px] bg-btn1 rounded-3xl text-white text-xl">
+                  class="h-[56px] w-[106px] bg-btn1 rounded-3xl text-white text-xl" @click="doneBtn"
+                >
                   Done
                 </button>
-                <button
-                  class="ml-5 text-btn1 text-xl underline">
-                  Delete
-                </button>
+                <button class="ml-5 text-btn1 text-xl underline" @click="deleteBtn">Delete</button>
               </div>
 
               <!-- <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /> -->
@@ -347,7 +360,8 @@ p,
 tr,
 th,
 td,
-button {
+button,
+div {
   font-family: "Itim";
 }
 
