@@ -20,18 +20,18 @@ let persons = ref([
 ]);
 
 let foodLists = ref([
-  { name: "somtum", price: 2020, person: [persons[0]] },
-  { name: "banana", price: 200, person: [persons[0], persons[1]] },
-  { name: "Kaiped", price: 200, person: [persons[0]] },
-  { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
-  { name: "somtum", price: 200, person: [persons[0]] },
-  { name: "banana", price: 200, person: [persons[0], persons[1]] },
-  { name: "Kaiped", price: 200, person: [persons[0]] },
-  { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
-  { name: "somtum", price: 200, person: [persons[0]] },
-  { name: "banana", price: 200, person: [persons[0], persons[1]] },
-  { name: "Kaiped", price: 200, person: [persons[0]] },
-  { name: "Kaikai", price: 200, person: [persons[0], persons[1]] },
+  { name: "somtum", price: 2020, person: [persons.value[0]] },
+  { name: "banana", price: 200, person: [persons.value[0], persons.value[1]] },
+  { name: "Kaiped", price: 200, person: [persons.value[0]] },
+  { name: "Kaikai", price: 200, person: [persons.value[0], persons.value[1]] },
+  { name: "somtum", price: 200, person: [persons.value[0]] },
+  { name: "banana", price: 200, person: [persons.value[0], persons.value[1]] },
+  { name: "Kaiped", price: 200, person: [persons.value[0]] },
+  { name: "Kaikai", price: 200, person: [persons.value[0], persons.value[1]] },
+  { name: "somtum", price: 200, person: [persons.value[0]] },
+  { name: "banana", price: 200, person: [persons.value[0], persons.value[1]] },
+  { name: "Kaiped", price: 200, person: [persons.value[0]] },
+  { name: "Kaikai", price: 200, person: [persons.value[0], persons.value[1]] },
 ]);
 
 
@@ -162,7 +162,7 @@ const showMenu = () => {
                 <div
                   class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
                   <div v-for="(person, index) in foodLists[index].person" key="index">
-                    <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ persons.name }}</span>
+                    <span class="mr-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
                   </div>
                 </div>
 
