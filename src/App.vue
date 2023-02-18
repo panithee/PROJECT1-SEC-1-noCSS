@@ -232,16 +232,7 @@ const showMenu = () => {
         <button class="text-xl text-center text-white">Delete All</button>
       </div>
 
-      <div class="fixed bottom-0 w-full h-20 bg-bgFooter">
-        <div class="flex">
-          <p class="w-1/2 text-2xl text-center pt-7">
-            Total:{{ totalFoodLits }}
-          </p>
-          <p class="w-1/2 text-2xl text-center pt-7">
-            Person: {{ persons.length }}
-          </p>
-        </div>
-      </div>
+
     </div>
 
     <!-- Model -->
@@ -281,8 +272,8 @@ const showMenu = () => {
               </div>
 
               <!-- <div class="flex ">
-                  <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
-                </div> -->
+                        <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
+                      </div> -->
 
               <div
                 :class="personFood.length !== 0 ? 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl' : 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl justify-center items-center'">
@@ -312,8 +303,8 @@ const showMenu = () => {
               <!-- <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /> -->
 
               <!-- <div class="flex justify-center">
-                  <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
-                </div> -->
+                        <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
+                      </div> -->
             </div>
           </div>
           <!--         <div class=""></div>-->
@@ -321,6 +312,18 @@ const showMenu = () => {
       </div>
     </div>
   </div>
+  <footer class="bg-white dark:bg-gray-900">
+    <div class="bottom-0 w-full h-20 bg-bgFooter">
+      <div class="flex">
+        <p class="w-1/2 text-2xl text-center pt-7">
+          Total:{{ totalFoodLits }}
+        </p>
+        <p class="w-1/2 text-2xl text-center pt-7">
+          Person: {{ persons.length }}
+        </p>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
