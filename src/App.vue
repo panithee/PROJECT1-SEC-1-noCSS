@@ -319,10 +319,10 @@ const avgFood = (index) => {
                 <div
                   class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-wrap sm:w-full sm:overflow-y-scroll">
                   <div v-for="(person, index) in persons" key="index" class="mt-1 ml-1">
-                    <span :class="checkPerson(person.name) ? 'bg-btn1' : 'bg-bgPage'" class="px-2 text-base rounded-xl "
+                    <button :class="checkPerson(person.name) ? 'bg-btn1' : 'bg-bgPage'" class="px-2 text-base rounded-xl "
                       @click="chooseToggle(person.name)">{{
                         person.name
-                      }}</span>
+                      }}</button>
                   </div>
                 </div>
               </div>
