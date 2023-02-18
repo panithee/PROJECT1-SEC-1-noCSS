@@ -231,7 +231,16 @@ const showMenu = () => {
         v-if="!sw">
         <button class="text-xl text-center text-white">Delete All</button>
       </div>
-
+      <div class="fixed bottom-0 w-full h-20 bg-bgFooter">
+        <div class="flex">
+          <p class="w-1/2 text-2xl text-center pt-7">
+            Total:{{ totalFoodLits }}
+          </p>
+          <p class="w-1/2 text-2xl text-center pt-7">
+            Person: {{ persons.length }}
+          </p>
+        </div>
+      </div>
 
     </div>
 
@@ -272,16 +281,16 @@ const showMenu = () => {
               </div>
 
               <!-- <div class="flex ">
-                        <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
-                      </div> -->
+                                                              <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
+                                                            </div> -->
 
               <div
                 :class="personFood.length !== 0 ? 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl' : 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl justify-center items-center'">
                 <div v-if="personFood.length == 0" class="flex items-center justify-center px-2 m-2 h-9 text-slate-700">No
                   one right now~~</div>
                 <div v-else
-                  class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
-                  <div class="mt-1 ml-1" v-for="(person, index) in personFood" key="index">
+                  class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-wrap sm:w-full sm:h-auto sm:overflow-y-scroll">
+                  <div class="mt-1 ml-1" v-for="(person, index) in persons" key="index">
                     <span class="px-2 text-base " :class="['color-' + (index % 4)]">{{ person.name }}</span>
                   </div>
                 </div>
@@ -290,10 +299,10 @@ const showMenu = () => {
               <div class="flex flex-row mt-4">
                 <input class="h-8 w-[224px] pl-4 text-xl bg-bgbtn rounded-xl text-brownFont"
                   placeholder="Please add name..." type="text" />
-                <button><img class="h-8 ml-3" src="./assets/addPersonBtn.svg" alt="" /></button>
+                <button @click="addPerson"><img class="h-8 ml-3" src="./assets/addPersonBtn.svg" alt="" /></button>
               </div>
-
-              <div class="flex flex-row mt-5">
+              error
+              <div class="flex flex-row mt-1">
                 <button class="h-[56px] w-[106px] bg-btn1 rounded-3xl text-white text-xl" @click="doneBtn">
                   Done
                 </button>
@@ -303,8 +312,8 @@ const showMenu = () => {
               <!-- <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /> -->
 
               <!-- <div class="flex justify-center">
-                        <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
-                      </div> -->
+                                                              <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
+                                                            </div> -->
             </div>
           </div>
           <!--         <div class=""></div>-->
@@ -312,18 +321,6 @@ const showMenu = () => {
       </div>
     </div>
   </div>
-  <footer class="bg-white dark:bg-gray-900">
-    <div class="bottom-0 w-full h-20 bg-bgFooter">
-      <div class="flex">
-        <p class="w-1/2 text-2xl text-center pt-7">
-          Total:{{ totalFoodLits }}
-        </p>
-        <p class="w-1/2 text-2xl text-center pt-7">
-          Person: {{ persons.length }}
-        </p>
-      </div>
-    </div>
-  </footer>
 </template>
 
 <style scoped>
