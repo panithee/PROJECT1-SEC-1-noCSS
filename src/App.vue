@@ -152,7 +152,10 @@ const personPrices = computed(() => {
   }
   return "";
 });
-
+const avgFood = (index) => {
+  console.log(index);
+  return foodLists.value[index].person.length === 0 ? 0 : foodLists.value[index].price / foodLists.value[index].person.length;
+};
 </script>
 
 <template>
@@ -210,7 +213,7 @@ const personPrices = computed(() => {
               </td>
               <td class="pr-4 text-2xl text-center">{{ food.price }}</td>
               <td class="pr-4 text-2xl text-center">
-                {{ food.price / food.person.length }}
+                {{ avgFood(index) }}
               </td>
               <td>
                 <img :id="index" alt="iconEdit" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg"
@@ -308,15 +311,12 @@ const personPrices = computed(() => {
               <div class="flex mt-2 text-2xl text-brownFont">Add Payer</div>
               <div class="flex mt-2">
                 <img alt="iconEdit" class="h-7" src="./assets/PersonCount.svg" /><span
-                  class="pl-2 pr-3 text-xl bg-bgbtn rounded-tr-xl rounded-br-xl">{{ personSize }}</span>
+                  class="pl-2 pr-3 text-xl bg-bgbtn rounded-tr-xl rounded-br-xl">{{ personFood.length }}</span>
               </div>
               <div
                 :class="personFood.length !== 0 ? 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl' : 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl justify-center items-center'">
-                <div v-if="persons.length === 0" class="flex items-center justify-center px-2 m-2 h-9 text-slate-700">
-                  No
-                  one right now~~
-                </div>
-                <div v-else
+
+                <div
                   class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-wrap sm:w-full sm:overflow-y-scroll">
                   <div v-for="(person, index) in persons" key="index" class="mt-1 ml-1">
                     <span :class="checkPerson(person.name) ? 'bg-btn1' : 'bg-bgPage'" class="px-2 text-base rounded-xl "
