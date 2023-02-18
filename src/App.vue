@@ -100,6 +100,7 @@ const totalFoodLists = computed(() => foodLists.value.reduce((total, food) => to
 const showMenuStatus = ref(false);
 const showMenu = () => {
   console.log("showMenu");
+  alertName.value = false;
   showMenuStatus.value = !showMenuStatus.value;
 };
 
@@ -149,12 +150,13 @@ const personPrices = computed(() => {
         }
       }
     }
+    person.price = Math.ceil(person.price);
   }
   return "";
 });
 const avgFood = (index) => {
   console.log(index);
-  return foodLists.value[index].person.length === 0 ? 0 : foodLists.value[index].price / foodLists.value[index].person.length;
+  return foodLists.value[index].person.length === 0 ? 0 : Math.ceil(foodLists.value[index].price / foodLists.value[index].person.length) ;
 };
 </script>
 
