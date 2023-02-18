@@ -53,7 +53,7 @@ const eventFoodList = (e, mode) => {
 };
 
 const doneBtn = () => {
-  if (foodName.value === "" || price.value === " ") {
+  if (foodName.value === "" || price.value == " ") {
     console.log("Error");
   }
   else if (modeTarget.value === "add") {
