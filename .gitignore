@@ -1,5 +1,4 @@
-/project/node_modules/
-/project/.vscode/
-.idea
-.ds_store
 node_modules
+.idea
+.vscode
+.ds_store

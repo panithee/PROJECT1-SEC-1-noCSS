@@ -34,13 +34,7 @@ let foodLists = ref([
   { name: "Kaikai", price: 200, person: [persons.value[0], persons.value[1]] },
 ]);
 
-let name = toRef(foodLists.value[1], "name");
 
-
-
-const hello = () => {
-  console.log("Hello");
-};
 
 const clearFoodList = () => {
   foodLists.value = [];
@@ -51,7 +45,6 @@ const deleteAll = () => {
   persons.value = [];
   return persons;
 };
-
 const sw = ref(true);
 const switchMenu = (e) => {
   if (e === "list") {
@@ -61,11 +54,9 @@ const switchMenu = (e) => {
     sw.value = false;
   }
 };
-
 const totalFoodLits = ref(
   foodLists.value.reduce((total, food) => total + food.price, 0)
 );
-
 let price = ref(0);
 let foodName = ref("");
 let personFood = ref([]);
@@ -77,7 +68,7 @@ const eventFoodList = (e, mode) => {
   target.value = e.target.id;
   if (mode === "add") {
     modeTarget.value = "add";
-    personSize=0 //try
+    personSize = 0 //try
     price.value = 0;
     foodName.value = "";
     personFood.value = [];
@@ -121,7 +112,7 @@ const doneBtn = () => {
 };
 
 const deleteBtn = () => {
-  foodLists.value.splice(target.value,1)
+  foodLists.value.splice(target.value, 1)
   showMenu();
 }
 
@@ -137,7 +128,7 @@ const showMenu = () => {
 </script>
 
 <template>
-   <div class="w-screen h-screen">
+  <div class="w-screen h-screen">
     <div class="absolute w-full h-full bg-bgPage">
       <h1 class="flex justify-center pt-10 text-3xl font-semibold text-brownFont drop-shadow">
         NO CSS
@@ -184,7 +175,7 @@ const showMenu = () => {
                 <div
                   class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
                   <div v-for="(person, index) in foodLists[index].person" key="index">
-                    <span class="ml-1 px-1 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
+                    <span class="px-1 ml-1 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
                   </div>
                 </div>
 
@@ -203,7 +194,7 @@ const showMenu = () => {
       </div>
 
       <div v-if="sw" class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1">
-        <button class="text-xl text-white w-full h-full" @click="eventFoodList($event, 'add')">ADD</button>
+        <button class="w-full h-full text-xl text-white" @click="eventFoodList($event, 'add')">ADD</button>
       </div>
 
       <div v-if="sw" class="flex justify-center w-4/12 m-auto mt-5">
@@ -254,32 +245,22 @@ const showMenu = () => {
     </div>
 
     <!-- Model -->
-    <div class="w-full h-full fixed" v-show="showMenuStatus">
-      <!-- <div class="absolute inset-0 bg-zinc-500/50  " @click="showMenu()"> -->
-      <div
-        class="flex items-center justify-center h-screen bg-[#FFF7F0] bg-opacity-70">
+    <div class="fixed w-full h-full" v-show="showMenuStatus">
+      <!-- <div class="absolute inset-0 bg-zinc-500/50 " @click="showMenu()"> -->
+      <div class="flex items-center justify-center h-screen bg-[#FFF7F0] bg-opacity-70">
         <div class="lg"></div>
         <div class="flex flex-col w-[776px] h-[448px] bg-bgPage rounded-[40px]">
 
           <div class="flex w-full h-[44px] justify-end">
-            <img
-              alt=""
-              class="w-10 h-10 mt-4 mr-4"
-              @click="showMenu()"
-              src="./assets/x.svg"
-            />
+            <img alt="" class="w-10 h-10 mt-4 mr-4" @click="showMenu()" src="./assets/x.svg" />
           </div>
 
           <div class="lg:flex lg:max-w-3xl -">
             <div class="flex pl-14 pr-7">
-              <div
-                class="flex flex-col items-center rounded-full bg-bgList1 w-[304px] h-[304px]"
-              >
+              <div class="flex flex-col items-center rounded-full bg-bgList1 w-[304px] h-[304px]">
                 <div class="flex justify-center items-center h-[168px] w-[296px] rounded-t-full bg-bgList1">
-                  <input
-                    type="number"
-                    class="h-[48px] w-[200px] text-center mt-12 text-[48px] bg-bgList1 text-brownFont"
-                  />
+                  <input type="number"
+                    class="h-[48px] w-[200px] text-center mt-12 text-[48px] bg-bgList1 text-brownFont" />
                 </div>
                 <div class="mt-3 w-[240px] border-b border-brownFont"></div>
                 <div></div>
@@ -291,60 +272,48 @@ const showMenu = () => {
               <div class="text-2xl first-letter:flex text-brownFont">
                 Your Food
               </div>
-              <input
-                placeholder="Your Food" v-model="foodName"
-                class="mt-2 bg-bgbtn w-[304px] h-[48px] rounded-[20px] pl-4 text-[24px] text-brownFont"
-                type="text"
-              />
-              <div class="mt-2 flex text-2xl text-brownFont">Add Payer</div>
-              <div class="mt-2 flex">
-                <img
-                  alt="iconEdit"
-                  class="h-7"
-                  src="./assets/PersonCount.svg"
-                /><span
-                  class="pl-2 pr-3 text-xl bg-bgbtn rounded-tr-xl rounded-br-xl"
-                  >{{ personSize }}</span
-                >
+              <input placeholder="Your Food" v-model="foodName"
+                class="mt-2 bg-bgbtn w-[304px] h-[48px] rounded-[20px] pl-4 text-[24px] text-brownFont" type="text" />
+              <div class="flex mt-2 text-2xl text-brownFont">Add Payer</div>
+              <div class="flex mt-2">
+                <img alt="iconEdit" class="h-7" src="./assets/PersonCount.svg" /><span
+                  class="pl-2 pr-3 text-xl bg-bgbtn rounded-tr-xl rounded-br-xl">{{ personSize }}</span>
               </div>
 
               <!-- <div class="flex ">
-              <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
-            </div> -->
+                  <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" />
+                </div> -->
 
-              <div :class="personFood.length!==0 ? 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl' : 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl justify-center items-center'">
-                <div v-if="personFood.length==0" class="flex justify-center items-center h-9 m-2 px-2 text-slate-700">No one right now~~</div>
+              <div
+                :class="personFood.length !== 0 ? 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl' : 'flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl justify-center items-center'">
+                <div v-if="personFood.length == 0" class="flex items-center justify-center px-2 m-2 h-9 text-slate-700">No
+                  one right now~~</div>
                 <div v-else
                   class="flex flex-wrap w-24 h-20 overflow-y-scroll sm:overflow-hidden sm:flex-nowrap sm:w-36 sm:h-auto sm:overflow-x-scroll">
-                  <div class="ml-1 mt-1" v-for="(person, index) in personFood" key="index">
-                    <span class=" px-2 text-base" :class="['color-' + (index % 4)]">{{ person.name }}</span>
+                  <div class="mt-1 ml-1" v-for="(person, index) in personFood" key="index">
+                    <span class="px-2 text-base " :class="['color-' + (index % 4)]">{{ person.name }}</span>
                   </div>
                 </div>
               </div>
 
               <div class="flex flex-row mt-4">
-                <input
-                  class="h-8 w-[224px] pl-4 text-xl bg-bgbtn rounded-xl text-brownFont"
-                  placeholder="Please add name..."
-                  type="text"
-                />
+                <input class="h-8 w-[224px] pl-4 text-xl bg-bgbtn rounded-xl text-brownFont"
+                  placeholder="Please add name..." type="text" />
                 <button><img class="h-8 ml-3" src="./assets/addPersonBtn.svg" alt="" /></button>
               </div>
 
               <div class="flex flex-row mt-5">
-                <button
-                  class="h-[56px] w-[106px] bg-btn1 rounded-3xl text-white text-xl" @click="doneBtn" 
-                >
+                <button class="h-[56px] w-[106px] bg-btn1 rounded-3xl text-white text-xl" @click="doneBtn">
                   Done
                 </button>
-                <button class="ml-5 text-btn1 text-xl underline" @click="deleteBtn">Delete</button>
+                <button class="ml-5 text-xl underline text-btn1" @click="deleteBtn">Delete</button>
               </div>
 
               <!-- <img alt="iconEdit" class="w-10 h-10 mr-1" src="./assets/user-circle (3).svg" /> -->
 
               <!-- <div class="flex justify-center">
-              <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
-            </div> -->
+                  <button class="w-1/4 h-16 my-4 text-xl bg-white rounded-3xl text-btn1">Done</button>
+                </div> -->
             </div>
           </div>
           <!--         <div class=""></div>-->

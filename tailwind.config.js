@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        itim: "'Itim', cursive"
+        itim: ['Itim']
       },
 
       colors: {
@@ -27,8 +27,8 @@ module.exports = {
         "person2": '#F7E9FF',
         "person3":' #FFE9EE',
         "person4":'#FFF9E9',
-        "bgbtn" : '#FFEDE9'
-
+        "bgbtn" : '#FFEDE9',
+        "checkboxGreen" : '#D6FBD0'
       }
     },
   },
