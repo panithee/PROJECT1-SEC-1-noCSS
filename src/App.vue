@@ -1,4 +1,5 @@
 <script setup>
+// practice
 import { ref, computed } from "vue";
 
 let persons = ref([
@@ -19,6 +20,7 @@ const switchMenu = (e) => {
   }
   if (e === "person") {
     sw.value = false;
+    personPrices();
   }
 };
 
@@ -32,54 +34,54 @@ let personSize = ref();
 
 const eventFoodList = (e, mode) => {
 
-  if (mode === "add") {
-    modeTarget.value = "add";
-    price.value = 0;
-    foodName.value = "";
-    personFood.value = [];
+    if (mode == 'add') {
+    modeTarget.value = 'add';
+    price.value = 0
+    foodName.value = ""
+    personFood = []
   }
-  if (mode === "edit") {
-    target.value = e.target.id;
-    modeTarget.value = "edit";
-    const food = foodLists.value[e.target.id];
-    price.value = food.price;
-    foodName.value = food.name;
-    personFood.value = food.person;
-    personSize = food.person.length;
-  } else {
-    console.log("Error");
-  }
-  showMenu();
+
+  if (mode == 'edit') {
+      target.value = e.target.id
+      modeTarget.value = 'edit'
+      const food = foodLists.value[e.target.id]
+      price.value = food.price
+      foodName.value = food.name
+      personFood.value = food.person
+      personSize = food.person.length
+    }else{
+      console.log("Error")
+      console.log(mode)
+    }
+
+    showMenu()
 };
 
 const doneBtn = () => {
-  if (foodName.value === "" || price.value == " ") {
-    console.log("Error");
-  }
-  else if (modeTarget.value === "add") {
-    foodLists.value.push({
-      name: foodName.value,
-      price: price.value,
-      person: personFood.value,
-    });
-    foodName.value = "";
-    price.value = 0;
-    personFood.value = [];
-  } else if (modeTarget.value === "edit") {
+  if(foodName.value === "" || price.value === 0) {
+    console.log('error');
+  }else if(modeTarget.value === 'add'){
+    foodLists.push({
+      name:foodName.value, 
+      price:price.value, 
+      person:personFood.value
+    })
+      foodName.value = ""
+      price.value = 0
+      personFood.value = []
+  }else if (modeTarget.value === 'edit') {
 
     foodLists.value[target.value].price = price.value;
     foodLists.value[target.value].name = foodName.value;
     foodLists.value[target.value].person = personFood.value;
-  } else {
+  }else{
     console.log("Error");
   }
-  console.log(foodLists.value[target]);
 
+  modeTarget.value = ""
+  target.value = ""
 
-  modeTarget.value = "";
-  target.value = "";
-
-  showMenu();
+  showMenu()
 };
 const clearFoodList = () => {
   foodLists.value = [];
@@ -99,9 +101,7 @@ const totalFoodLists = computed(() => foodLists.value.reduce((total, food) => to
 // show model
 const showMenuStatus = ref(false);
 const showMenu = () => {
-  console.log("showMenu");
-  alertName.value = false;
-  showMenuStatus.value = !showMenuStatus.value;
+  showMenuStatus.value != showMenuStatus.value
 };
 
 const checkPerson = (personName) => {
@@ -121,16 +121,7 @@ const chooseToggle = (personName) => {
 const namePerson = ref("");
 const alertName = ref(false);
 const addPerson = () => {
-
-  if (namePerson.value !== "" && !(persons.value.find((person) => person.name.toLowerCase() === namePerson.value.toLowerCase()))) {
-    alertName.value = false;
-    persons.value.push({ name: namePerson.value, price: 0, status: false });
-
-    namePerson.value = "";
-  }
-  else {
-    alertName.value = true;
-  }
+ 
 };
 const deletePerson = (event) => {
 
@@ -140,7 +131,7 @@ const deletePerson = (event) => {
   persons.value.splice(event.target.id, 1);
 };
 // person
-const personPrices = computed(() => {
+const personPrices = () => {
   for (const person of persons.value) {
     person.price = 0;
     for (const food of foodLists.value) {
@@ -153,7 +144,7 @@ const personPrices = computed(() => {
     person.price = Math.ceil(person.price);
   }
   return "";
-});
+};
 const avgFood = (index) => {
   console.log(index);
   return foodLists.value[index].person.length === 0 ? 0 : Math.ceil(foodLists.value[index].price / foodLists.value[index].person.length) ;
@@ -218,8 +209,10 @@ const avgFood = (index) => {
                 {{ avgFood(index) }}
               </td>
               <td>
-                <img :id="index" alt="iconEdit" class="w-5 h-5 mr-3" src="./assets/more-vertical.svg"
-                  @click="eventFoodList($event, 'edit')" />
+                <img :id="index" @click="eventFoodList($event,'edit')" 
+                alt="iconEdit" class="w-5 h-5 mr-3" 
+                src="./assets/more-vertical.svg"
+                 />
               </td>
             </tr>
           </tbody>
@@ -227,7 +220,7 @@ const avgFood = (index) => {
       </div>
 
       <div v-if="sw" class="flex items-center justify-center w-2/12 h-12 m-auto mt-5 rounded-full bg-btn1">
-        <button class="w-full h-full text-xl text-white" @click="eventFoodList($event, 'add')">ADD</button>
+        <button @click="eventFoodList($event, 'add')" class="w-full h-full text-xl text-white">ADD</button>
       </div>
 
       <div v-if="sw" class="flex justify-center w-4/12 m-auto mt-5">
@@ -247,16 +240,15 @@ const avgFood = (index) => {
           </thead>
           <tbody>
             <tr v-for="(person, index) in persons" key="index" :class="person.status ? 'bg-checkboxGreen' : 'bg-bgBox'" @click="person.status = !person.status" ref="person.status">
-              <td class="pl-16 text-2xl text-left">
+              <td class="pl-16 text-2xl text-left" >
                 <div class="mt-2">
                   <input v-model="person.status" type="checkbox" />
                   <label class="= text-2xl"></label>
                   {{ person.name }}
                 </div>
               </td>
-              {{ personPrices }}
               <td class="text-2xl text-center">{{ person.price }}</td>
-              <td> <img alt="" :id="index" class="w-5 h-10" src="./assets/x.svg" @click="deletePerson($event)" /></td>
+              <td> <img alt="" class="w-5 h-10" src="./assets/x.svg" @click="deletePerson($event)" /></td>
             </tr>
           </tbody>
         </table>
@@ -279,7 +271,7 @@ const avgFood = (index) => {
 
     </div>
 
-    <!-- Model -->
+    <!-- Model popup-->
     <div v-show="showMenuStatus" class="fixed w-full h-full">
       <!-- <div class="absolute inset-0 bg-zinc-500/50 " @click="showMenu()"> -->
       <div class="flex items-center justify-center h-screen bg-[#FFF7F0] bg-opacity-70">
@@ -287,7 +279,7 @@ const avgFood = (index) => {
         <div class="flex flex-col w-[776px] h-[448px] bg-bgPage rounded-[40px]">
 
           <div class="flex w-full h-[44px] justify-end">
-            <img alt="" class="w-10 h-10 mt-4 mr-4" src="./assets/x.svg" @click="showMenu()" />
+            <img alt="" class="w-10 h-10 mt-4 mr-4" src="./assets/x.svg" @click="showMenu()"/>
           </div>
 
           <div class="lg:flex lg:max-w-3xl -">
@@ -332,7 +324,7 @@ const avgFood = (index) => {
               <div class="flex flex-row mt-4">
                 <input class="h-8 w-[224px] pl-4 text-xl bg-bgbtn rounded-xl text-brownFont"
                   placeholder="Please add name..." type="text" v-model="namePerson" />
-                <button @click="addPerson"><img alt="" class="h-8 ml-3" src="./assets/addPersonBtn.svg" /></button>
+                <button><img alt="" class="h-8 ml-3" src="./assets/addPersonBtn.svg" /></button>
               </div>
               <strong class="text-red-600" v-show="alertName"> User already exists</strong>
 
