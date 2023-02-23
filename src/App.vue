@@ -73,8 +73,9 @@ const eventFoodList = (e, mode) => {
 const doneBtn = () => {
   if (foodName.value === "" || price.value == " ") {
     console.log("Error");
-    error.value = "entered incorrect information"
-    if (!alertName) {
+
+    if (!alertName.value) {
+      error.value = "entered incorrect information"
       alertName.value = true;
     }
   }
