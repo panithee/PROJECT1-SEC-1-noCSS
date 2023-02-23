@@ -307,12 +307,12 @@ const avgFood = (index) => {
                     type="number" v-model="price" />
                 </div>
                 <div class="w-[180px] mt-1 sm:mt-4 sm:w-[240px] border-b border-brownFont"></div>
-                <div class="text-3xl sm:text-4xl mt-1 sm:mt-7 text-brownFont">{{ avgFood(target) }}</div>
+                <div class="mt-1 text-3xl sm:text-4xl sm:mt-7 text-brownFont">{{ avgFood(target) }}</div>
                 <div class="hidden sm:inline-block sm:mt-4 md:mt-8">AVG price</div>
               </div>
             </div>
 
-            <div class="ml-4 mt-1">
+            <div class="mt-1 ml-4">
               <div class="text-xl sm:text-2xl first-letter:flex text-brownFont">
                 Your Food
               </div>
@@ -325,7 +325,7 @@ const avgFood = (index) => {
                   class="pl-2 pr-3 text-l bg-bgbtn rounded-tr-xl rounded-br-xl">{{ personFood.length }}</span>
               </div>
               <!-- <div
-                                                                                                    class="flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl"> -->
+                                                                                                              class="flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl"> -->
               <div
                 class="flex flex-wrap w-11/12 h-20 pr-1 mt-1 overflow-y-scroll rounded-lg bg-bgbtn sm:overflow-hidden sm:flex-wrap sm:rounded-xl sm:overflow-y-scroll">
                 <div v-for="(person, index) in persons" key="index" class="mt-2 ml-2">
