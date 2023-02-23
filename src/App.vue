@@ -21,7 +21,6 @@ let foodName = ref("");
 let personFood = ref([]);
 let modeTarget = ref("");
 let target = ref(null);
-let personSize = ref();
 const namePerson = ref("");
 const alertName = ref(false);
 const error = ref("User already exists");
@@ -65,7 +64,6 @@ const eventFoodList = (e, mode) => {
     price.value = food.price;
     foodName.value = food.name;
     personFood.value = food.person;
-    personSize = food.person.length;
   } else {
     console.log("Error");
   }
@@ -76,7 +74,7 @@ const doneBtn = () => {
   if (foodName.value === "" || price.value == " ") {
     console.log("Error");
     error.value = "entered incorrect information"
-    if (alertName != true) {
+    if (!alertName) {
       alertName.value = true;
     }
   }
