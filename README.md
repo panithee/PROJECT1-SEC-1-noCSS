@@ -23,7 +23,7 @@ Group Members<br>
 - แสดงรายชื่อคนที่กินอาหารพร้อมราคาที่ต้องจ่ายในแต่ละบุคคล
 - Checklist คนที่จ่ายค่าอาหารแล้ว
 
-คู่มือการใช้งานแอปพลิเคชัน
+คู่มือการใช้งานแอปพลิเคชัน<br>
 1.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/1_StartPage.jpg)<br>
 2.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/1_2_usePage.jpg)<br>
 3.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/2_1_Add.jpg)<br>
