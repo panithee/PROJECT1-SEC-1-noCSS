@@ -22,6 +22,9 @@ let personFood = ref([]);
 let modeTarget = ref("");
 let target = ref(null);
 let personSize = ref();
+const namePerson = ref("");
+const alertName = ref(false);
+const error = ref("User already exists");
 const avgFood = (index) => {
   console.log(index);
   console.log(typeof (index));
@@ -72,26 +75,33 @@ const eventFoodList = (e, mode) => {
 const doneBtn = () => {
   if (foodName.value === "" || price.value == " ") {
     console.log("Error");
-  } else if (modeTarget.value === "add") {
-    foodLists.value.push({
-      name: foodName.value,
-      price: price.value,
-      person: personFood.value,
-    });
-    foodName.value = "";
-    price.value = 0;
-    personFood.value = [];
-  } else if (modeTarget.value === "edit") {
-
-    foodLists.value[target.value].price = price.value;
-    foodLists.value[target.value].name = foodName.value;
-    foodLists.value[target.value].person = personFood.value;
-  } else {
-    console.log("Error");
+    error.value = "entered incorrect information"
+    if (alertName != true) {
+      alertName.value = true;
+    }
   }
-  modeTarget.value = "";
-  target.value = null;
-  showModel();
+  else {
+    if (modeTarget.value === "add") {
+      foodLists.value.push({
+        name: foodName.value,
+        price: price.value,
+        person: personFood.value,
+      });
+      foodName.value = "";
+      price.value = 0;
+      personFood.value = [];
+    } else if (modeTarget.value === "edit") {
+
+      foodLists.value[target.value].price = price.value;
+      foodLists.value[target.value].name = foodName.value;
+      foodLists.value[target.value].person = personFood.value;
+    } else {
+      console.log("Error");
+    }
+    modeTarget.value = "";
+    target.value = null;
+    showModel();
+  }
 };
 
 const checkPerson = (personName) => {
@@ -117,8 +127,7 @@ const deleteBtn = () => {
   foodLists.value.splice(parseInt(target.value), 1)
   showModel();
 }
-const namePerson = ref("");
-const alertName = ref(false);
+
 const addPerson = () => {
 
   if (namePerson.value !== "" && !(persons.value.find((person) => person.name.toLowerCase() === namePerson.value.toLowerCase()))) {
@@ -127,6 +136,7 @@ const addPerson = () => {
 
     namePerson.value = "";
   } else {
+    error.value = "User already exists"
     alertName.value = true;
   }
 
@@ -336,7 +346,7 @@ const deleteAll = () => {
                 <button @click="addPerson"><img alt="" class="h-6 ml-3 sm:h-8" src="./assets/addPersonBtn.svg" />
                 </button>
               </div>
-              <strong v-show="alertName" class="absolute text-red-600"> User already exists</strong>
+              <strong v-show="alertName" class="absolute text-red-600"> {{ error }}</strong>
 
               <div class="flex flex-row mt-6">
                 <button
