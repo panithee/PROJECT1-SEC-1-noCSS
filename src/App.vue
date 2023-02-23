@@ -27,12 +27,13 @@ let price = ref(0);
 let foodName = ref("");
 let personFood = ref([]);
 let modeTarget = ref("");
-let target = ref("");
+let target = ref(null);
 let personSize = ref();
 
 const eventFoodList = (e, mode) => {
 
   if (mode === "add") {
+    target.value = null;
     modeTarget.value = "add";
     price.value = 0;
     foodName.value = "";
@@ -77,7 +78,7 @@ const doneBtn = () => {
 
 
   modeTarget.value = "";
-  target.value = "";
+  target.value = null;
 
   showMenu();
 };
@@ -156,7 +157,12 @@ const personPrices = computed(() => {
 });
 const avgFood = (index) => {
   console.log(index);
-  return foodLists.value[index].person.length === 0 ? 0 : Math.ceil(foodLists.value[index].price / foodLists.value[index].person.length) ;
+  console.log(typeof (index));
+  if (index === undefined || index === null) { return 0; }
+  if (foodLists.value[index].person.length == 0) {
+    return 0;
+  }
+  return Math.ceil(foodLists.value[index].price / foodLists.value[index].person.length);
 };
 </script>
 
@@ -284,22 +290,25 @@ const avgFood = (index) => {
       <!-- <div class="absolute inset-0 bg-zinc-500/50 " @click="showMenu()"> -->
       <div class="flex items-center justify-center h-screen bg-[#FFF7F0] bg-opacity-70">
         <div class="lg"></div>
-        <div class="flex flex-col w-[330px] h-[440px] rounded-[16px] sm:w-[600px] sm:h-[412px] md:w-[728px] md:h-[416px] bg-bgPage sm:rounded-[32px]">
+        <div
+          class="flex flex-col w-[330px] h-[440px] rounded-[16px] sm:w-[600px] sm:h-[412px] md:w-[728px] md:h-[416px] bg-bgPage sm:rounded-[32px]">
 
-          <div class="flex w-full h-10 justify-end">
-            <img alt="" class="w-8 h-8 mt-3 mr-3 sm:w-10 sm:h-10 sm:mt-4 sm:mr-4" src="./assets/x.svg" @click="showMenu()" />
+          <div class="flex justify-end w-full h-10">
+            <img alt="" class="w-8 h-8 mt-3 mr-3 sm:w-10 sm:h-10 sm:mt-4 sm:mr-4" src="./assets/x.svg"
+              @click="showMenu()" />
           </div>
 
-          <div class="flex sm:ml-6 flex-col sm:flex-row justify-center sm:space-x-6 md:space-x-10">
+          <div class="flex flex-col justify-center sm:ml-6 sm:flex-row sm:space-x-6 md:space-x-10">
             <div class="flex justify-center">
-              <div class="flex flex-col items-center w-[220px] h-[100px] rounded-xl sm:rounded-full bg-bgList1 sm:w-[264px] sm:h-[264px] md:w-[304px] md:h-[304px]">
-                <div class="flex justify-center items-center h-1/2 w-3/4 rounded-t-full bg-bgList1">
-                  <input class=" w-full text-center mt-2 text-4xl sm:mt-12 sm:text-[48px] bg-bgList1 text-brownFont" type="number"
-                    v-model="price" />
+              <div
+                class="flex flex-col items-center w-[220px] h-[100px] rounded-xl sm:rounded-full bg-bgList1 sm:w-[264px] sm:h-[264px] md:w-[304px] md:h-[304px]">
+                <div class="flex items-center justify-center w-3/4 rounded-t-full h-1/2 bg-bgList1">
+                  <input class=" w-full text-center mt-2 text-4xl sm:mt-12 sm:text-[48px] bg-bgList1 text-brownFont"
+                    type="number" v-model="price" />
                 </div>
                 <div class="w-[180px] mt-1 sm:w-[240px] border-b border-brownFont"></div>
-                <div class="text-4xl mt-7"></div>
-                <div class="hidden sm:mt-[88px]">AVG price</div>
+                <div class="text-4xl mt-7">{{ avgFood(target) }}</div>
+                <div class="hidden sm:inline-block sm:mt-[88px]">AVG price</div>
               </div>
             </div>
 
@@ -310,33 +319,36 @@ const avgFood = (index) => {
               <input v-model="foodName"
                 class="h-[24px] text-base rounded-[8px] sm:mt-1 bg-bgbtn sm:w-11/12 md:w-[304px] md:h-[40px] sm:rounded-2xl pl-4 sm:text-2xl text-brownFont"
                 placeholder="Your Food" type="text" />
-              <div class="flex text-xl mt-2 sm:text-2xl text-brownFont">Add Payer</div>
+              <div class="flex mt-2 text-xl sm:text-2xl text-brownFont">Add Payer</div>
               <div class="flex mt-1">
                 <img alt="iconEdit" class="sm:h-6 md:h-7" src="./assets/PersonCount.svg" /><span
                   class="pl-2 pr-3 text-l bg-bgbtn rounded-tr-xl rounded-br-xl">{{ personFood.length }}</span>
               </div>
               <!-- <div
-                class="flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl"> -->
-                <div
-                  class="flex flex-wrap mt-1 pr-1 bg-bgbtn  h-20  rounded-lg overflow-y-scroll sm:overflow-hidden sm:flex-wrap w-11/12 sm:rounded-xl sm:overflow-y-scroll">
-                  <div v-for="(person, index) in persons" key="index" class="mt-2 ml-2">
-                    <button :class="checkPerson(person.name) ? 'bg-btn1' : 'bg-bgPage'" class="px-2 text-base rounded-xl "
-                      @click="chooseToggle(person.name)">{{
-                        person.name
-                      }}</button>
-                  </div>
+                                                                                                    class="flex mt-2 bg-bgbtn w-[280px] h-[92px] rounded-2xl"> -->
+              <div
+                class="flex flex-wrap w-11/12 h-20 pr-1 mt-1 overflow-y-scroll rounded-lg bg-bgbtn sm:overflow-hidden sm:flex-wrap sm:rounded-xl sm:overflow-y-scroll">
+                <div v-for="(person, index) in persons" key="index" class="mt-2 ml-2">
+                  <button :class="checkPerson(person.name) ? 'bg-btn1' : 'bg-bgPage'" class="px-2 text-base rounded-xl "
+                    @click="chooseToggle(person.name)">{{
+                      person.name
+                    }}</button>
                 </div>
+              </div>
               <!-- </div> -->
 
-              <div class="flex flex-row sm:w-11/12 mt-2">
-                <input class="h-6 sm:h-8 w-4/5 pl-4 text-base rounded-[8px] sm:text-xl bg-bgbtn sm:rounded-xl text-brownFont"
+              <div class="flex flex-row mt-2 sm:w-11/12">
+                <input
+                  class="h-6 sm:h-8 w-4/5 pl-4 text-base rounded-[8px] sm:text-xl bg-bgbtn sm:rounded-xl text-brownFont"
                   placeholder="Please add name..." type="text" v-model="namePerson" />
-                <button @click="addPerson"><img alt="" class="h-6 sm:h-8 ml-3" src="./assets/addPersonBtn.svg" /></button>
+                <button @click="addPerson"><img alt="" class="h-6 ml-3 sm:h-8" src="./assets/addPersonBtn.svg" /></button>
               </div>
               <strong class="absolute text-red-600" v-show="alertName"> User already exists</strong>
 
               <div class="flex flex-row mt-6">
-                <button class="h-8 sm:h-14 w-12  text-base rounded-md sm:w-[106px] bg-btn1 sm:rounded-3xl text-white sm:text-xl" @click="doneBtn">
+                <button
+                  class="h-8 sm:h-14 w-12  text-base rounded-md sm:w-[106px] bg-btn1 sm:rounded-3xl text-white sm:text-xl"
+                  @click="doneBtn">
                   Done
                 </button>
                 <button class="ml-5 text-xl underline text-btn1" @click="deleteBtn">Delete</button>
