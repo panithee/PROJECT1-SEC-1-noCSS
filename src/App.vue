@@ -144,7 +144,6 @@ const addPerson = () => {
 // person
 const personPrices = computed(() => {
   for (const person of persons.value) {
-    person.price = 0;
     for (const food of foodLists.value) {
       for (const personFood of food.person) {
         if (person.name === personFood.name) {
