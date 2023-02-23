@@ -133,13 +133,11 @@ const addPerson = () => {
   if (namePerson.value !== "" && !(persons.value.find((person) => person.name.toLowerCase() === namePerson.value.toLowerCase()))) {
     alertName.value = false;
     persons.value.push({ name: namePerson.value, price: 0, status: false });
-
     namePerson.value = "";
   } else {
     error.value = "User already exists"
     alertName.value = true;
   }
-
 };
 
 // person
