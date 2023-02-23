@@ -108,7 +108,7 @@ const checkPerson = (personName) => {
   return personFood.value.filter(person => person.name === personName).length > 0;
 };
 
-const chooseToggle = (event, personName) => {
+const chooseToggle = (personName) => {
   if (checkPerson(personName)) {
     personFood.value = personFood.value.filter(
       (person) => person.name !== personName
@@ -124,7 +124,9 @@ const avgFoodModel = computed(
   }
 )
 const deleteBtn = () => {
-  foodLists.value.splice(parseInt(target.value), 1)
+  if (target.value !== null) {
+    foodLists.value.splice(parseInt(target.value), 1)
+  }
   showModel();
 }
 
@@ -331,7 +333,7 @@ const deleteAll = () => {
                 class="flex flex-wrap w-11/12 h-20 pr-1 mt-1 overflow-y-scroll rounded-lg bg-bgbtn sm:overflow-hidden sm:flex-wrap sm:rounded-xl sm:overflow-y-scroll">
                 <div v-for="(person, index) in persons" key="index" class="mt-2 ml-2">
                   <button :id=index :class="checkPerson(person.name) ? 'bg-btn1' : 'bg-bgPage'"
-                    class="px-2 text-base rounded-xl " @click="chooseToggle($event, person.name)">{{
+                    class="px-2 text-base rounded-xl " @click="chooseToggle(person.name)">{{
                       person.name
                     }}
                   </button>
