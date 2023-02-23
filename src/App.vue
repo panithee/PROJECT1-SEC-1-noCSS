@@ -291,7 +291,7 @@ const avgFood = (index) => {
       <div class="flex items-center justify-center h-screen bg-[#FFF7F0] bg-opacity-70">
         <div class="lg"></div>
         <div
-          class="flex flex-col w-[330px] h-[440px] rounded-[16px] sm:w-[600px] sm:h-[412px] md:w-[728px] md:h-[416px] bg-bgPage sm:rounded-[32px]">
+          class="flex flex-col w-[330px] h-[460px] rounded-[16px] sm:w-[600px] sm:h-[412px] md:w-[728px] md:h-[416px] bg-bgPage sm:rounded-[32px]">
 
           <div class="flex justify-end w-full h-10">
             <img alt="" class="w-8 h-8 mt-3 mr-3 sm:w-10 sm:h-10 sm:mt-4 sm:mr-4" src="./assets/x.svg"
@@ -303,16 +303,16 @@ const avgFood = (index) => {
               <div
                 class="flex flex-col items-center w-[220px] h-[100px] rounded-xl sm:rounded-full bg-bgList1 sm:w-[264px] sm:h-[264px] md:w-[304px] md:h-[304px]">
                 <div class="flex items-center justify-center w-3/4 rounded-t-full h-1/2 bg-bgList1">
-                  <input class=" w-full text-center mt-2 text-4xl sm:mt-12 sm:text-[48px] bg-bgList1 text-brownFont"
+                  <input class=" w-full text-center mt-2 text-4xl sm:mt-20 sm:text-[48px] bg-bgList1 text-brownFont"
                     type="number" v-model="price" />
                 </div>
-                <div class="w-[180px] mt-1 sm:w-[240px] border-b border-brownFont"></div>
-                <div class="text-4xl mt-7">{{ avgFood(target) }}</div>
-                <div class="hidden sm:inline-block sm:mt-[88px]">AVG price</div>
+                <div class="w-[180px] mt-1 sm:mt-4 sm:w-[240px] border-b border-brownFont"></div>
+                <div class="text-3xl sm:text-4xl mt-1 sm:mt-7 text-brownFont">{{ avgFood(target) }}</div>
+                <div class="hidden sm:inline-block sm:mt-4 md:mt-8">AVG price</div>
               </div>
             </div>
 
-            <div class="ml-4">
+            <div class="ml-4 mt-1">
               <div class="text-xl sm:text-2xl first-letter:flex text-brownFont">
                 Your Food
               </div>
