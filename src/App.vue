@@ -104,7 +104,7 @@ const doneBtn = () => {
 };
 
 const checkPerson = (personName) => {
-  return personFood.value.filter(person => person.name === personName).length > 0;
+  return personFood.value.find(person => person.name === personName);
 };
 
 const chooseToggle = (personName) => {
