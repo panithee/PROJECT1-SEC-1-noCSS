@@ -21,9 +21,20 @@ Group Members<br>
 - แสดงรายชื่ออาหาร คนที่กินในแต่ละเมนู และค่าเฉลี่ยของเมนูนั้น
 - แก้ไขรายการอาหาร เช่น เพิ่มคนหรือลบรายการอาหารนั้นทิ้ง
 - แสดงรายชื่อคนที่กินอาหารพร้อมราคาที่ต้องจ่ายในแต่ละบุคคล
-- Check list คนที่จ่ายค่าอาหารแล้ว
+- Checklist คนที่จ่ายค่าอาหารแล้ว
 
 คู่มือการใช้งานแอปพลิเคชัน
+1.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/1_StartPage.jpg)<br>
+2.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/1_2_usePage.jpg)<br>
+3.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/2_1_Add.jpg)<br>
+4.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/2_2_Add.jpg)<br>
+5.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/2_3_Add.jpg)<br>
+6.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/2_4_Add.jpg)<br>
+7.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/3_1_Edit.jpg)<br>
+8.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/3_2_Edit.jpg)<br>
+9.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/3_3_Edit.jpg)<br>
+10.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/4_1_PersonPage.jpg)<br>
 
 แหล่งข้อมูลอ้างอิงหรือเป็นแรงบันดาลใจในการพัฒนาแอปพลิเคชัน
 - https://jabont.com/checkbill/ อ้างอิงเรื่องของการใช้งาน
+- เกิดจากทุกคนไม่ได้กินอาหารได้ทุกประเภท
