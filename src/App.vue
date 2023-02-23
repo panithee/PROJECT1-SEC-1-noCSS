@@ -298,7 +298,7 @@ const avgFood = (index) => {
                     v-model="price" />
                 </div>
                 <div class="w-[180px] mt-1 sm:w-[240px] border-b border-brownFont"></div>
-                <div></div>
+                <div>{{ avgFood }}</div>
                 <div class="hidden sm:mt-[88px]">AVG price</div>
               </div>
             </div>
