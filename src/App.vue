@@ -286,7 +286,7 @@ const avgFood = (index) => {
         <div class="lg"></div>
         <div class="flex flex-col w-[330px] h-[440px] rounded-[16px] sm:w-[600px] sm:h-[412px] md:w-[728px] md:h-[416px] bg-bgPage sm:rounded-[32px]">
 
-          <div class="flex w-full h-[28px] justify-end">
+          <div class="flex w-full h-10 justify-end">
             <img alt="" class="w-8 h-8 mt-3 mr-3 sm:w-10 sm:h-10 sm:mt-4 sm:mr-4" src="./assets/x.svg" @click="showMenu()" />
           </div>
 
@@ -294,11 +294,11 @@ const avgFood = (index) => {
             <div class="flex justify-center">
               <div class="flex flex-col items-center w-[220px] h-[100px] rounded-xl sm:rounded-full bg-bgList1 sm:w-[264px] sm:h-[264px] md:w-[304px] md:h-[304px]">
                 <div class="flex justify-center items-center h-1/2 w-3/4 rounded-t-full bg-bgList1">
-                  <input class=" w-full text-center mt-2 text-[36px] sm:mt-12 sm:text-[48px] bg-bgList1 text-brownFont" type="number"
+                  <input class=" w-full text-center mt-2 text-4xl sm:mt-12 sm:text-[48px] bg-bgList1 text-brownFont" type="number"
                     v-model="price" />
                 </div>
                 <div class="w-[180px] mt-1 sm:w-[240px] border-b border-brownFont"></div>
-                <div>{{ avgFood }}</div>
+                <div class="text-4xl mt-7"></div>
                 <div class="hidden sm:mt-[88px]">AVG price</div>
               </div>
             </div>
@@ -335,7 +335,7 @@ const avgFood = (index) => {
               </div>
               <strong class="absolute text-red-600" v-show="alertName"> User already exists</strong>
 
-              <div class="flex flex-row mt-7">
+              <div class="flex flex-row mt-6">
                 <button class="h-8 sm:h-14 w-12  text-base rounded-md sm:w-[106px] bg-btn1 sm:rounded-3xl text-white sm:text-xl" @click="doneBtn">
                   Done
                 </button>
