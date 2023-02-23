@@ -4,7 +4,7 @@
 หน้าที่รับผิดชอบ : แถบเมนู Per Person ทั้งหมด เพื่อเช็คว่าใครจ่ายตังแล้วและสรุปผลว่าแต่ละคนจะต้องจ่ายค่าอาหารของตัวเองคนละเท่าไหร่ ช่วยทำ responsive หน้า All List และ Per Person<br>
 สัดส่วนเปอร์เซ็นต์ : 20%<br>
 2. 64130500014 Chalunthorn Niyom<br>
-หน้าที่รับผิดชอบ : ทำฟังก์ชันปุ่ม add คนและปุ่ม done ในตอน add และ icon edit ช่วยทำ responsive หน้า All List และ Per Person<br>
+หน้าที่รับผิดชอบ : ทำฟังก์ชันปุ่ม add food add คนและปุ่ม done ในตอน add  ช่วยทำ responsive หน้า All List และ Per Person<br>
 สัดส่วนเปอร์เซ็นต์ : 20%<br>
 3. 64130500047 Panithee Virojwongchai<br>
 หน้าที่รับผิดชอบ : นำอาหารที่ถูก add เพิ่มเข้ามาแสดงชื่ออาหาร ราคาเต็ม และคำนวณค่าอาหารต่อรายบุคคลในหน้า All List ทำฟังก์ชันและปุ่ม clear รายการอาหารทั้งหมด ช่วยทำ responsive หน้า All List และ Per Person<br>
