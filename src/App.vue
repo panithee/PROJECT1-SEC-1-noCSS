@@ -60,7 +60,7 @@ const eventFoodList = (e, mode) => {
   if (mode === "edit") {
     target.value = e.target.id;
     modeTarget.value = "edit";
-    const food = foodLists.value[e.target.id];
+    const food = foodLists.value[target.value];
     price.value = food.price;
     foodName.value = food.name;
     personFood.value = food.person;
