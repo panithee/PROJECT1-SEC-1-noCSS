@@ -36,5 +36,5 @@
 10.![Alt text](https://github.com/panithee/PROJECT1-SEC-1-noCSS/blob/main/docs/4_1_PersonPage.jpg)<br>
 
 **แหล่งข้อมูลอ้างอิงหรือเป็นแรงบันดาลใจในการพัฒนาแอปพลิเคชัน**
-- https://jabont.com/checkbill/ อ้างอิงเรื่องของการใช้งาน
+- https://jabont.com/checkbill/ อ้างอิงเรื่องของการใช้งานของแอปพลิเคชันนี้
 - เกิดจากทุกคนไม่ได้กินอาหารได้ทุกประเภท ทำให้หารค่าอาหารลำบาก
