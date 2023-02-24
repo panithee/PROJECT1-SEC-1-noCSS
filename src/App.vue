@@ -73,9 +73,9 @@ const eventFoodList = (e, mode) => {
 const doneBtn = () => {
   if (foodName.value === "" || price.value == " ") {
     console.log("Error");
-
+    error.value = "entered incorrect information"
     if (!alertName.value) {
-      error.value = "entered incorrect information"
+    
       alertName.value = true;
     }
   }
@@ -144,6 +144,7 @@ const addPerson = () => {
 // person
 const personPrices = computed(() => {
   for (const person of persons.value) {
+    person.price = 0
     for (const food of foodLists.value) {
       for (const personFood of food.person) {
         if (person.name === personFood.name) {
